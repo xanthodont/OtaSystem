@@ -28,9 +28,9 @@ public class JPABasicDao<TEntity> implements IBasicDao<TEntity>{
 		EntityManagerFactory facroty = Persistence.createEntityManagerFactory("ota-unit");
 		em = facroty.createEntityManager();
 		
-		Type genType = this.getClass().getGenericInterfaces()[0];
-        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();  
-        entityClass = (Class<TEntity>) params[0];
+		//Type genType = this.getClass().getGenericInterfaces()[0];
+        //Type[] params = ((ParameterizedType) genType).getActualTypeArguments();  
+        //entityClass = (Class<TEntity>) params[0];
 	}
 	
 	@SuppressWarnings("unchecked")

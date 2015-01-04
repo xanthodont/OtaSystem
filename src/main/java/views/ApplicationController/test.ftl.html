@@ -1,6 +1,87 @@
-<#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Test Page">    
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
 
+    <!-- Bootstrap -->
+    <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="/assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+	
+	
+	
+	<!--[if lte IE 6]>
+  	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/bootstrap-ie6.css">
+  	<![endif]-->
+  	<!--[if lte IE 7]>
+  	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/ie.css">
+  	<![endif]-->
 
-
-</@layout.myLayout>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/assets/bsie/js/html5shiv.min.js"></script>
+      <script src="/assets/bsie/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+ 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">${i18n("header.company")}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+				<li class="dropdown user">
+					<a href="#" class="dropdown-toggle"	data-toggle="dropdown"> 
+						<span class="username">${"username"}</span> 
+						<i class="icon-angle-down"></i>
+					</a>
+		
+					<ul class="dropdown-menu">
+						<li><a href="extra_profile.html">
+							<i class="icon-user"></i>
+							${i18n("header.user.profile")}</a>
+						</li>
+						<li><a href="page_calendar.html">
+							<i class="icon-calendar"></i>
+							${i18n("header.user.message")}</a>
+						</li>
+						<li class="divider"></li>
+						
+						<li><a href="extra_lock.html">
+							<i class="icon-lock"></i>
+							${i18n("header.user.lockScreen")}</a>
+						</li>
+						<li><a href="login.html">
+							<i class="icon-key"></i>
+							${i18n("header.user.logOut")}</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+            <ul class="nav">
+              <li class="active"><a href="#">${i18n("header.system")}</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    
+	<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lte IE 6]>
+  	<script type="text/javascript" src="/assets/bsie/js/bootstrap-ie.js"></script>
+  	<![endif]-->
+  </body>
+  	
+    
+</html>

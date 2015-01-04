@@ -14,7 +14,7 @@ public class Profile {
 	@Column(name="realName")
 	private String realName;
 	
-	@Column(name="phone")
+	@Column(name="phone") 
 	private String phone;
 	
 	@Column(name="country")

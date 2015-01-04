@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Account {
 	@Id
 	@GenericGenerator(name="systemUUID", strategy="uuid") 
-	@GeneratedValue(generator="systemUUID")
+	@GeneratedValue(generator="systemUUID") 
 	private String Id;
 	
 	@Column(name="username")
