@@ -11,15 +11,8 @@
   	<!-- Bootstrap -->
     <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="/assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-	<!-- for administrator dashboard -->
-	<link href="/assets/bootstrap/css/dashboard.css" rel="stylesheet">
-	<!-- for navigation -->
-	<link href="/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="/assets/bootstrap/css/style.css" rel="stylesheet">
-	<link href="/assets/bootstrap/css/style-metro.css" rel="stylesheet">
-	<link href="/assets/bootstrap/css/style-responsive.css" rel="stylesheet">
-	<link href="/assets/bootstrap/css/style-non-responsive.css" rel="stylesheet">
-	
+	<!-- dashboard -->
+	<link href="/assets/css/dashboard.css" rel="stylesheet">
 	
 	<!--[if lte IE 6]>
   	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/bootstrap-ie6.css">
@@ -27,6 +20,8 @@
   	<!--[if lte IE 7]>
   	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/ie.css">
   	<![endif]-->
+  	
+  	<!--[if lt IE 9]><script src="./assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,18 +31,25 @@
     <![endif]-->
   </head>
 <body>
-    <#include "header.ftl.html"/>
+    <#include "tHeader.ftl.html"/>
+    <br/><br/><br/>
+    
+	<div class="container-fluid">
+      <!-- Example row of columns -->
+      <div class="row row-fluid">
+        <div class="span2 col-md-3 col-lg-2 sidebar">
+          <#include "navigation.ftl.html"/>
+        </div>
+        <div class="span8 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 main">
+          content
+       </div>
+      </div>
 
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-sm-3 col-md-2 sidebar">
-				left
-			</div>
-  			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  				mainContent
-  			</div>
-  		</div>
-  	</div>
+
+    </div> <!-- /container -->
+      <footer>
+        <p>© Company 2012</p>
+      </footer>
         
 	<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
