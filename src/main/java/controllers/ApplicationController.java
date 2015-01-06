@@ -18,6 +18,8 @@ package controllers;
 
 import java.util.List;
 
+import ninja.BasicAuthFilter;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import areas.account.models.Account;
@@ -26,6 +28,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import dao.IBasicDao;
+import filters.AuthorizationFilter;
 
 
 @Singleton
@@ -33,11 +36,14 @@ public class ApplicationController {
 	
 	@Inject
 	private IBasicDao<Account> dao;
+	
+	public Result login() {
+		return Results.html();
+	}
 
+	@FilterWith(AuthorizationFilter.class)
     public Result index() {
-
         return Results.html();
-
     }
     
     public Result helloWorldJson() {

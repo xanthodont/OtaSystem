@@ -16,6 +16,7 @@
 
 package conf;
 
+import ninja.UsernamePasswordValidator;
 import areas.account.models.Account;
 
 import com.google.inject.AbstractModule;
@@ -36,6 +37,13 @@ public class Module extends AbstractModule {
     		//.annotatedWith(Named.names("Language"))
     		.to(new TypeLiteral<JPABasicDao<Account>>(){});
         //bind(new TypeLiteral<IBasicDao<Account>>() {});
+    	
+    	bind(UsernamePasswordValidator.class).toInstance(new UsernamePasswordValidator() {
+            @Override
+            public boolean validateCredentials(String username, String password) {
+                return "user".equals(username) && "password".equals(password);
+            }
+        });
     }
 
 }

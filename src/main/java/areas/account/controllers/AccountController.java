@@ -22,6 +22,15 @@ public class AccountController {
 	@Inject
 	private Logger logger;
 	
+	public Result login() {
+		logger.debug("account/login");
+		return Results.html();
+	}
+	
+	public Result register() {
+		return Results.html();
+	}
+	
 	public Result profile() {
 		List<Account> accountList = dao.all();
 		logger.debug("size:%d, username: %s", accountList.size(), accountList.get(0).getUsername());

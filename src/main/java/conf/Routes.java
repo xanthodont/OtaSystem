@@ -17,10 +17,11 @@
 package conf;
 
 
-import areas.account.controllers.AccountController;
+
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
+import areas.account.controllers.AccountController;
 import controllers.ApplicationController;
 
 public class Routes implements ApplicationRoutes {
@@ -28,9 +29,10 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {  
         
-        router.GET().route("/").with(ApplicationController.class, "index");
+        //router.GET().route("/").with(ApplicationController.class, "index");
         router.GET().route("/hello_world.json").with(ApplicationController.class, "helloWorldJson");
         router.GET().route("/test").with(ApplicationController.class, "test");
+        router.GET().route("/login").with(ApplicationController.class, "login");
         
  
         ///////////////////////////////////////////////////////////////////////
@@ -47,7 +49,9 @@ public class Routes implements ApplicationRoutes {
 		///////////////////////////////////////////////////////////////////////
 		// Area Extension by xanthodont 
 		///////////////////////////////////////////////////////////////////////
-        router.GET().route("/account/profile").with(AccountController.class, "profile");
+        router.GET().route("/account/profile/{accountId}").with(AccountController.class, "profile");
+        router.GET().route("/account/login").with(AccountController.class, "login");
+        router.GET().route("/account/register").with(AccountController.class, "register");
     }
 
 }
