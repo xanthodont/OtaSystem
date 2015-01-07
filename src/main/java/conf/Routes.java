@@ -23,28 +23,30 @@ import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import areas.account.controllers.AccountController;
 import controllers.ApplicationController;
+import controllers.AssetsExController;
 
 public class Routes implements ApplicationRoutes {
 
     @Override
     public void init(Router router) {  
         
-        //router.GET().route("/").with(ApplicationController.class, "index");
-        router.GET().route("/hello_world.json").with(ApplicationController.class, "helloWorldJson");
+        router.GET().route("/").with(ApplicationController.class, "index");
         router.GET().route("/test").with(ApplicationController.class, "test");
         router.GET().route("/login").with(ApplicationController.class, "login");
+        router.GET().route("/admin").with(ApplicationController.class, "admin");
         
  
         ///////////////////////////////////////////////////////////////////////
-        // Assets (pictures / javascript)
+        // AssetsEx (pictures / javascript)  
+        // 扩展原有的AssetsController，让浏览器支持永久缓存，实现前端性能优化
         ///////////////////////////////////////////////////////////////////////    
-        router.GET().route("/assets/webjars/{fileName: .*}").with(AssetsController.class, "serveWebJars");
-        router.GET().route("/assets/{fileName: .*}").with(AssetsController.class, "serveStatic");
+        router.GET().route("/assets/webjars/{fileName: .*}").with(AssetsExController.class, "serveWebJars");
+        router.GET().route("/assets/{fileName: .*}").with(AssetsExController.class, "serveStatic");
         
         ///////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/.*").with(ApplicationController.class, "index");
+        //router.GET().route("/.*").with(ApplicationController.class, "index"); 
         
 		///////////////////////////////////////////////////////////////////////
 		// Area Extension by xanthodont 

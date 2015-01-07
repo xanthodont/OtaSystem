@@ -22,6 +22,7 @@ import ninja.BasicAuthFilter;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.SecureFilter;
 import areas.account.models.Account;
 
 import com.google.inject.Inject;
@@ -34,32 +35,20 @@ import filters.AuthorizationFilter;
 @Singleton
 public class ApplicationController {
 	
-	@Inject
-	private IBasicDao<Account> dao;
+	//@Inject
+	//private IBasicDao<Account> dao;
 	
 	public Result login() {
-		return Results.html();
+		return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
 	}
 
-	@FilterWith(AuthorizationFilter.class)
     public Result index() {
-        return Results.html();
+        return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
     }
     
-    public Result helloWorldJson() {
-    	Account account = new Account();
-		account.setUsername("username1");
-		account.setPassword("password");
-		account.setEmail("abc@konka.com");
-		account.setRegisterTime(System.currentTimeMillis());
-		//dao.insert(account).commit();
-		
-    	List<Account> accountList = dao.all();
-        SimplePojo simplePojo = new SimplePojo();
-        simplePojo.content = String.format("size:%d, username: ", accountList.size());
-
-        return Results.json().render(simplePojo);
-
+    @FilterWith({AuthorizationFilter.class})
+    public Result admin() {
+    	return Results.html();
     }
     
     public Result test() {

@@ -12,18 +12,19 @@ import areas.account.models.Account;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import dao.AccountDao;
 import dao.IBasicDao;
 
 @Singleton
 public class AccountController {
 	@Inject
-	private IBasicDao<Account> dao;
+	private AccountDao dao;
 	
 	@Inject
 	private Logger logger;
 	
 	public Result login() {
-		logger.debug("account/login");
+		//dao.validateCredentials(username, password);
 		return Results.html();
 	}
 	

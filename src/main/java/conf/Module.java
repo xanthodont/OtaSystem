@@ -23,6 +23,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
+import dao.AccountDao;
 import dao.IBasicDao;
 import dao.JPABasicDao;
 
@@ -38,12 +39,21 @@ public class Module extends AbstractModule {
     		.to(new TypeLiteral<JPABasicDao<Account>>(){});
         //bind(new TypeLiteral<IBasicDao<Account>>() {});
     	
-    	bind(UsernamePasswordValidator.class).toInstance(new UsernamePasswordValidator() {
-            @Override
-            public boolean validateCredentials(String username, String password) {
-                return "user".equals(username) && "password".equals(password);
-            }
-        });
+    	bindDao();
+    	
+    	bindFilters();
     }
+
+	private void bindDao() {
+		// TODO Auto-generated method stub
+		//bind();
+	}
+
+	private void bindFilters() {
+		// TODO Auto-generated method stub
+		/** 用户密码验证器 */
+		bind(UsernamePasswordValidator.class).to(AccountDao.class);
+		//bind();
+	}
 
 }

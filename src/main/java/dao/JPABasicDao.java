@@ -41,6 +41,8 @@ public class JPABasicDao<TEntity> implements IBasicDao<TEntity>{
 		criteria.select(root);
 		return em.createQuery(criteria).getResultList();
 	}
+	
+	//public List<TEntity> get() {}
 
 	public IBasicDao<TEntity> insert(TEntity... entities) {
 		// TODO Auto-generated method stub

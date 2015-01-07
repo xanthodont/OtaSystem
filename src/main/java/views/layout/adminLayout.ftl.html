@@ -21,7 +21,11 @@
 	<link href="/assets/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 	<link href="/assets/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link href="/assets/media/css/error.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/assets/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
 	
 	<!--[if lte IE 6]>
   	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/bootstrap-ie6.css">
@@ -38,13 +42,24 @@
       <script src="/assets/media/js/excanvas.min.js"></script>
     <![endif]-->
   </head>
-<body class="page-404-full-page page-500-full-page">
-    <div class="row-fluid">
-		<#nested/>
-	</div>
+<body class="page-header-fixed">
+    <#include "header.ftl.html"/>
+    
+    <div class="page-container">
+    	<#include "navigation.ftl.html"/> 
+	    
+		<div class="page-content">
+			<div class="container-fluid">
+				<#include "contentHeader.ftl.html"/>
+				<#nested/>
+			</div>
+		</div>
+    </div>
+
+    <#include "footer.ftl.html"/>
+    
   
-  	<!-- base -->
-    <script type="text/javascript" src="/assets/js/common.js"></script>    
+        
 	<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script> -->
     <!--[if lte IE 6]>
@@ -54,12 +69,32 @@
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 	<script src="/assets/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>   
 	<script src="/assets/media/js/bootstrap.min.js" type="text/javascript"></script>
+	   
 	<script src="/assets/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 	<script src="/assets/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 	<script src="/assets/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 	<script src="/assets/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script src="/assets/media/js/jquery.vmap.js" type="text/javascript"></script>   
+	<script src="/assets/media/js/jquery.vmap.russia.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.vmap.world.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.vmap.europe.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.vmap.germany.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.vmap.usa.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
+	<script src="/assets/media/js/jquery.flot.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.flot.resize.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.pulsate.min.js" type="text/javascript"></script>
+	<script src="/assets/media/js/date.js" type="text/javascript"></script>
+	<script src="/assets/media/js/daterangepicker.js" type="text/javascript"></script>     
+	<script src="/assets/media/js/jquery.gritter.js" type="text/javascript"></script>
+	<script src="/assets/media/js/fullcalendar.min.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
+	<script src="/assets/media/js/jquery.sparkline.min.js" type="text/javascript"></script>  
+	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="/assets/media/js/app.js" type="text/javascript"></script>     
+	<script src="/assets/media/js/app.js" type="text/javascript"></script>
+	<script src="/assets/media/js/index.js" type="text/javascript"></script>        
 	<!-- END PAGE LEVEL SCRIPTS -->  
 	<script>
 		jQuery(document).ready(function() {    

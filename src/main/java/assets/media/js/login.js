@@ -22,10 +22,10 @@ var Login = function () {
 
 	            messages: {
 	                username: {
-	                    required: "Username is required."
+	                    required: lang.login.requiredUsername
 	                },
 	                password: {
-	                    required: "Password is required."
+	                    required: lang.login.requiredPassword
 	                }
 	            },
 
@@ -55,7 +55,7 @@ var Login = function () {
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
-	                    window.location.href = "index.html";
+	                    return true;
 	                }
 	                return false;
 	            }
