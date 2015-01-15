@@ -38,11 +38,13 @@ public class ApplicationController {
 	//@Inject
 	//private IBasicDao<Account> dao;
 	
+	
+	
 	public Result login() {
 		return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
 	}
 
-    public Result index() {
+    public Result index(Account account) {
         return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
     }
     
