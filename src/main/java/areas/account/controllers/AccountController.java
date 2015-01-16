@@ -33,8 +33,6 @@ public class AccountController {
 	}
 	
 	public Result profile() {
-		List<Account> accountList = dao.all();
-		logger.debug("size:%d, username: %s", accountList.size(), accountList.get(0).getUsername());
-		return Results.json().render(accountList);
+		return Results.ok();
 	}
 }

@@ -25,19 +25,12 @@ import com.google.inject.TypeLiteral;
 
 import dao.AccountDao;
 import dao.IBasicDao;
-import dao.JPABasicDao;
 
 @Singleton
 public class Module extends AbstractModule {
     
 
     protected void configure() {
-        //IBasicDao<Account> dao = new JPABasicDao<Account>();
-        // bind your injections here!
-    	bind(new TypeLiteral<IBasicDao<Account>>() {})
-    		//.annotatedWith(Named.names("Language"))
-    		.to(new TypeLiteral<JPABasicDao<Account>>(){});
-        //bind(new TypeLiteral<IBasicDao<Account>>() {});
     	
     	bindDao();
     	

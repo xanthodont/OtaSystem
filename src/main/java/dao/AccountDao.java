@@ -3,7 +3,7 @@ package dao;
 import ninja.UsernamePasswordValidator;
 import areas.account.models.Account;
 
-public class AccountDao<Account> extends JPABasicDao<Account> implements UsernamePasswordValidator {
+public class AccountDao extends BasicHibernateDao<Account, Long> implements UsernamePasswordValidator {
 	
 	@Override
 	public boolean validateCredentials(String username, String password) {
