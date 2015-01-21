@@ -1,12 +1,15 @@
 package dao;
 
 /**
- * sql属�?
+ * sql属�?
  * @author jan
  *
  */
 public class SqlProperty 
 {
+	public final String EQUAL = "="; 
+	public final String NOT_EQUAL = "!=";
+	
 	private String name;
 	private Object value;
 	private String type;
@@ -29,5 +32,15 @@ public class SqlProperty
 		this.type = type;
 	}
 	
-
+	public void equal(String name, Object value) {
+		this.setName(name);
+		this.setValue(value);
+		this.setType(EQUAL);
+	}
+	
+	public void notEqual(String name, Object value) {
+		this.setName(name);
+		this.setValue(value);
+		this.setType(NOT_EQUAL);
+	}
 }

@@ -38,7 +38,7 @@ public class Routes implements ApplicationRoutes {
  
         ///////////////////////////////////////////////////////////////////////
         // AssetsEx (pictures / javascript)  
-        // À©Õ¹Ô­ÓÐµÄAssetsController£¬ÈÃä¯ÀÀÆ÷Ö§³ÖÓÀ¾Ã»º´æ£¬ÊµÏÖÇ°¶ËÐÔÄÜÓÅ»¯
+        // ï¿½ï¿½Õ¹Ô­ï¿½Ðµï¿½AssetsControllerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½æ£¬Êµï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½
         ///////////////////////////////////////////////////////////////////////    
         router.GET().route("/assets/webjars/{fileName: .*}").with(AssetsExController.class, "serveWebJars");
         router.GET().route("/assets/{fileName: .*}").with(AssetsExController.class, "serveStatic");
@@ -54,6 +54,8 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/account/profile/{accountId}").with(AccountController.class, "profile");
         router.GET().route("/account/login").with(AccountController.class, "login");
         router.GET().route("/account/register").with(AccountController.class, "register");
+        router.GET().route("/account/list").with(AccountController.class, "list");
+        router.GET().route("/account/add").with(AccountController.class, "add");
     }
 
 }

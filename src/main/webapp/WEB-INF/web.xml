@@ -28,6 +28,7 @@
 	<listener>
 		<listener-class>ninja.servlet.NinjaServletListener</listener-class>
 	</listener>
+	
 
 	<filter>
 		<filter-name>guiceFilter</filter-name>

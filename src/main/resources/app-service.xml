@@ -5,11 +5,5 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd">
 	
-    <bean id="appService" class="com.konka.ois.mvc.service.AppService">
-	    <property name="appDao" ref="appDao" />
-	    <property name="jedisPool" ref="jedisPool"/>
-	</bean>
-	<bean id="switchService" class="com.konka.ois.mvc.service.SwitchService">
-	    <property name="switchDao" ref="switchDao" />
-	</bean>
+   
 </beans>

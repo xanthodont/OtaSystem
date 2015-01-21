@@ -16,35 +16,61 @@
 
 package conf;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import service.AccountServiceImpl;
+import service.IAccountService;
 import ninja.UsernamePasswordValidator;
 import areas.account.models.Account;
+import areas.account.models.Profile;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 import dao.AccountDao;
+import dao.HAccountDao;
 import dao.IBasicDao;
+import dao.ProfileDao;
+import dao.base.IDatabase;
 
 @Singleton
 public class Module extends AbstractModule {
     
 
     protected void configure() {
-    	
-    	bindDao();
-    	
+    	configDatabases();
+    	configDaos();
+    	configServices();
     	bindFilters();
     }
 
-	private void bindDao() {
+	private void configDatabases() {
 		// TODO Auto-generated method stub
-		//bind();
+		bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());;
+	}
+
+	private void configDaos() {
+		// TODO Auto-generated method stub
+		//bind(TypeLiteral.class).toInstance(arg0);
+		bind(new TypeLiteral<IDatabase<Account>>() {})
+			.to(new TypeLiteral<AccountDao>(){});
+		
+		bind(new TypeLiteral<IDatabase<Profile>>() {})
+			.to(new TypeLiteral<ProfileDao>(){});
+		
+		bind(new TypeLiteral<IBasicDao<Account, String>>() {})
+		.to(new TypeLiteral<HAccountDao>(){});
+	}
+	
+	private void configServices() {
+		bind(IAccountService.class).to(AccountServiceImpl.class);
 	}
 
 	private void bindFilters() {
 		// TODO Auto-generated method stub
-		/** 用户密码验证器 */
+		/**  */
 		bind(UsernamePasswordValidator.class).to(AccountDao.class);
 		//bind();
 	}

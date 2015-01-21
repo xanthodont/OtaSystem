@@ -5,12 +5,5 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd">
 	
-    <bean id="appDao" class="com.konka.ois.mvc.dao.impl.AppDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory" />
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
-    </bean>
-    <bean id="switchDao" class="com.konka.ois.mvc.dao.impl.SwitchDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory" />
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
-    </bean>
+    
 </beans>
