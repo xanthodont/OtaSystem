@@ -2,7 +2,7 @@ package dao;
 
 import dao.base.Database;
 import ninja.UsernamePasswordValidator;
-import areas.account.models.Account;
+import areas.user.models.Account;
 
 public class AccountDao extends Database<Account> implements UsernamePasswordValidator {
 	

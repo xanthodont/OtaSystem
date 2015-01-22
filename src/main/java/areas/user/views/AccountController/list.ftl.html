@@ -1,0 +1,67 @@
+<#import "/views/layout/adminLayout.ftl.html" as layout> 
+<@layout.myLayout "Home Page">    
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box light-grey">
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-globe"></i>${i18n("account.manage")}</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse"></a>
+			<a href="#portlet-config" data-toggle="modal" class="config"></a>
+			<a href="javascript:;" class="reload"></a>
+			<a href="javascript:;" class="remove"></a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="clearfix">
+			<div class="btn-group">
+				<button id="sample_editable_1_new" class="btn green">
+					${i18n("account.addnew")} <i class="icon-plus"></i>
+				</button>
+			</div>
+			<div class="btn-group pull-right">
+				<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+				</button>
+				<ul class="dropdown-menu pull-right">
+					<li><a href="#">Print</a></li>
+					<li><a href="#">Save as PDF</a></li>
+					<li><a href="#">Export to Excel</a></li>
+				</ul>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered table-hover" id="sample_1">
+			<thead>
+				<tr>
+					<th style="width:8px;">#</th>
+					<th>${i18n("account.username")}</th>
+					<th class="hidden-480">${i18n("account.email")}</th>
+					<th class="hidden-480">${i18n("account.registerTime")}</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<#assign i = 1>
+				<#list accounts as act>
+				<tr class="odd gradeX">
+					<td>${i} <#assign i = i+1></td>
+					<td>${act.username}</td>
+					<td class="hidden-480">
+						<a href="javascript:;">
+						<#if act.email??>${act.email}
+						<#else>${i18n("notSetting")}</#if></a>
+					</td>
+					<td class="hidden-480">${act.registerTime}</td>
+					<td ><span class="label label-success">Approved</span></td>
+					<td>
+						<a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a>
+						<a href="#" class="btn mini black"><i class="icon-trash"></i> Delete</a>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- END EXAMPLE TABLE PORTLET-->
+
+</@layout.myLayout>

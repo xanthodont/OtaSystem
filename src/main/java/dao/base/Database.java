@@ -13,6 +13,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.google.inject.Inject;
 
+import dao.base.Queryable.OperateType;
+
 public class Database<TEntity> implements IDatabase<TEntity> {
 	@Inject
 	private SessionFactory sessionFactory;
@@ -34,7 +36,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	public IQueryable<TEntity> all() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass);
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.all);
 		
 		return query;
 	}
@@ -86,25 +88,27 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	public IQueryable<TEntity> where() {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession();
-		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass);
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.all);
 		//query.a
 		//query.list()
 		return query;
 	}
 
 	@Override
-	public TEntity first(Predicate<TEntity> predicate) {
+	public TEntity first(ICondition condition) {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria("");
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.first);
 		
-		return null;
+		return null; 
 	}
 
 	@Override
-	public int count() {
+	public long count(ICondition condition) {
 		// TODO Auto-generated method stub
-		return 0;
+		session = sessionFactory.openSession();
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.count);
+		return query.where(condition).toCount();
 	}
 	
 	@Override

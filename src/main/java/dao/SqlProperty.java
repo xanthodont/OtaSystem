@@ -32,13 +32,13 @@ public class SqlProperty
 		this.type = type;
 	}
 	
-	public void equal(String name, Object value) {
+	public void equals(String name, Object value) {
 		this.setName(name);
 		this.setValue(value);
 		this.setType(EQUAL);
 	}
 	
-	public void notEqual(String name, Object value) {
+	public void notEquals(String name, Object value) {
 		this.setName(name);
 		this.setValue(value);
 		this.setType(NOT_EQUAL);

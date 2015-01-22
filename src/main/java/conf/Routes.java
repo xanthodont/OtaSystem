@@ -18,10 +18,12 @@ package conf;
 
 
 
-import ninja.AssetsController;
+
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
-import areas.account.controllers.AccountController;
+import areas.user.controllers.AccountController;
+import areas.ota.controllers.ProjectController;
+import areas.ota.controllers.VersionController;
 import controllers.ApplicationController;
 import controllers.AssetsExController;
 
@@ -51,11 +53,17 @@ public class Routes implements ApplicationRoutes {
 		///////////////////////////////////////////////////////////////////////
 		// Area Extension by xanthodont 
 		///////////////////////////////////////////////////////////////////////
+        router.GET().route("/user/account").with(AccountController.class, "list");
+        //router.GET().route("/user/privilege").with(AccountController.class, "index");
+
         router.GET().route("/account/profile/{accountId}").with(AccountController.class, "profile");
         router.GET().route("/account/login").with(AccountController.class, "login");
         router.GET().route("/account/register").with(AccountController.class, "register");
-        router.GET().route("/account/list").with(AccountController.class, "list");
-        router.GET().route("/account/add").with(AccountController.class, "add");
+        router.GET().route("/user/account/list").with(AccountController.class, "list");
+        router.GET().route("/user/account/add").with(AccountController.class, "add");
+        
+        router.GET().route("/ota/project").with(ProjectController.class, "index");
+        router.GET().route("/ota/version").with(VersionController.class, "index");
     }
 
 }

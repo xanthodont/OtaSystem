@@ -1,0 +1,12 @@
+<#import "/views/layout/adminLayout.ftl.html" as layout> 
+<@layout.myLayout "Home Page">    
+
+
+<h1>${i18n("hello.world")}</h1>
+<p>${i18n("hello.world.json")}</p>
+<a href="/account/add">Add Account</a>
+<#if flash.count??>
+	<h1>${flash.count}</h1>
+</#if>
+
+</@layout.myLayout>

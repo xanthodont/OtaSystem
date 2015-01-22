@@ -22,8 +22,8 @@ import org.hibernate.cfg.Configuration;
 import service.AccountServiceImpl;
 import service.IAccountService;
 import ninja.UsernamePasswordValidator;
-import areas.account.models.Account;
-import areas.account.models.Profile;
+import areas.user.models.Account;
+import areas.user.models.Profile;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -56,12 +56,10 @@ public class Module extends AbstractModule {
 		//bind(TypeLiteral.class).toInstance(arg0);
 		bind(new TypeLiteral<IDatabase<Account>>() {})
 			.to(new TypeLiteral<AccountDao>(){});
-		
+	
 		bind(new TypeLiteral<IDatabase<Profile>>() {})
 			.to(new TypeLiteral<ProfileDao>(){});
 		
-		bind(new TypeLiteral<IBasicDao<Account, String>>() {})
-		.to(new TypeLiteral<HAccountDao>(){});
 	}
 	
 	private void configServices() {

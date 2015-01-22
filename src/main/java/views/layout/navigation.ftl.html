@@ -12,6 +12,7 @@
 			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 			<form class="sidebar-search">
 				<div class="input-box">
+				<!--  -->
 					<a href="javascript:;" class="remove"></a> 
 					<input type="text" placeholder="Search..." /> 
 					<input type="button" class="submit"	value=" " />
@@ -19,34 +20,36 @@
 			</form> 
 			<!-- END RESPONSIVE QUICK SEARCH FORM -->
 		</li>
-		<li class="start active "><a href="index.html"> 
+		<li class="menu-bar start">
+			<a href="/admin"> 
 				<i class="icon-home"></i> 
 				<span class="title">${i18n("nav.dashboard")}</span> 
-				<span class="selected"></span>
-		</a></li>
+			</a>
+		</li>
 		
-		<li class="">
+		<li class="menu-bar">
 			<a href="javascript:;"> 
 				<i class="icon-briefcase"></i> 
 				<span class="title">${i18n("nav.otaManage")}</span> 
 				<span class="arrow "></span>
 			</a>
 			<ul class="sub-menu">
-				<li><a href="maps_google.html">${i18n("nav.otaManage.project")}</a></li>
-				<li><a href="maps_vector.html">${i18n("nav.otaManage.version")}</a></li>
+				<li><a href="/ota/project">${i18n("nav.otaManage.project")}</a></li>
+				<li><a href="/ota/version">${i18n("nav.otaManage.version")}</a></li>
 			</ul>
 		</li>
 		
-		<li class=""><a href="javascript:;"> <i class="icon-user"></i>
-				<span class="title">${i18n("nav.userAuthority")}</span> <span class="arrow "></span>
+		<li class="menu-bar"><a href="javascript:;"> <i class="icon-user"></i>
+				<span class="title">${i18n("nav.userAuthority")}</span> 
+				<span class="arrow "></span>
 		</a>
 			<ul class="sub-menu">
-				<li><a href="account/list">${i18n("nav.userAuthority.user")}</a></li>
-				<li><a href="login_soft.html">${i18n("nav.userAuthority.authority")}</a></li>
+				<li><a href="/user/account">${i18n("nav.userAuthority.user")}</a></li>
+				<li><a href="/user/privilege">${i18n("nav.userAuthority.authority")}</a></li>
 			</ul>
 		</li>
 		
-		<li class="">
+		<li class="menu-bar">
 			<a href="javascript:;"> 
 				<i class="icon-bar-chart"></i> 
 				<span class="title">${i18n("nav.statCharts")}</span> 
@@ -58,7 +61,7 @@
 			</ul>
 		</li>
 		
-		<li class="">
+		<li class="menu-bar">
 			<a href="javascript:;"> 
 				<i class="icon-cogs"></i> 
 				<span class="title">${i18n("nav.setting")}</span> 

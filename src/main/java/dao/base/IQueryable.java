@@ -9,6 +9,8 @@ public interface IQueryable<TEntity> extends List {
 	
 	String toSqlString();
 	
+	long toCount();
+	
 	List<TEntity> toList();
 	
 	IPageList<TEntity> toPageList(); 

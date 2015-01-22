@@ -75,19 +75,19 @@ public class JPADatabase<TEntity> implements IDatabase<TEntity>{
 	}
 
 	@Override
-	public TEntity first() {
+	public TEntity first(ICondition condition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int count() {
+	public long count(ICondition condition) {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
-
 	@Override
-	public TEntity first(Predicate<TEntity> predicate) {
+	public TEntity first() {
 		// TODO Auto-generated method stub
 		return null;
 	}

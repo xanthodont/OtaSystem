@@ -18,7 +18,7 @@ public interface IDatabase<TEntity> {
 	
 	TEntity first();
 	
-	int count();
+	long count(ICondition condition);
 
-	TEntity first(Predicate<TEntity> predicate);
+	TEntity first(ICondition condition);
 }

@@ -2,18 +2,24 @@ package service;
 
 import com.google.inject.Inject;
 
-import areas.account.models.Account;
+import areas.user.models.Account;
 import dao.IBasicDao;
 import dao.base.IDatabase;
 
 public class AccountServiceImpl implements IAccountService {
 	@Inject
-	IBasicDao<Account, String> accountDao;
+	IDatabase<Account> accountDao;
 
 	@Override
 	public boolean validateCredentials(String username, String password) {
 		// TODO Auto-generated method stub
-		accountDao.findAll();
+		long count = accountDao.count(c -> c.equals("username", username));
+		if (count == 1) {
+			Account a = accountDao.first(c -> c.equals("username", username)); 
+			if (a.getPassword().equals(password)) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
