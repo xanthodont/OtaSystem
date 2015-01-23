@@ -48,7 +48,23 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "index.html";
+	            	var name = $( form).find('input[name="username"]').val();
+                    var pswd = $(form).find('input[name="password"]').val();
+                    $.ajax({
+                    	url: '/user/account/login',
+                        type: 'POST',
+                        data: {username: name, password: pswd},
+                        dataType: 'json',
+                        error: function(reps) {},
+                        success: function(reps) {
+                            if (reps.code == constants.code.success) {
+                                window.location.href = reps.msg;
+                            } else {
+                            	$('.alert-error', $('.login-form')).children('span').html(reps.msg);
+                            	$('.alert-error', $('.login-form')).show();
+                            }
+                        }
+                    });
 	            }
 	        });
 

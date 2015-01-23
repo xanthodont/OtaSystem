@@ -1,19 +1,25 @@
 <!-- BEGIN PAGE HEADER-->
-<div class="row-fluid">
+
 	<div class="span12">
 
 		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
+		<!-- -->
 		<h3 class="page-title">
-			${i18n("content.header.title")}<small>${i18n("content.header.tmore")}</small>
+			${hTitle} <small>${hDescription}</small> 
 		</h3>
 		<ul class="breadcrumb">
 			<li><i class="icon-home"></i> 
-				<a href="index.html">${i18n("nav.home")}</a> 
+				<a href="/admin">${i18n("nav.home")}</a> 
 				<i class="icon-angle-right"></i>
 			</li>
-
-			<li><a href="#">${i18n("nav.dashboard")}</a></li>
+			
+			<#list navs as nav>
+			
+			<li><a href="#">${nav}</a>
+				<i class="icon-angle-right"></i>
+			</li>
+			
+			</#list>
 
 			<li class="pull-right no-text-shadow">
 
@@ -22,8 +28,8 @@
 					data-tablet="" data-desktop="tooltips" data-placement="top"
 					data-original-title="Change dashboard date range">
 
-					<i class="icon-calendar"></i> <span></span> <i
-						class="icon-angle-down"></i>
+					<i class="icon-calendar"></i> <span></span> 
+					<i class="icon-angle-down"></i>
 
 				</div>
 
@@ -35,6 +41,6 @@
 
 	</div>
 
-</div>
+
 
 <!-- END PAGE HEADER-->

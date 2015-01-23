@@ -48,7 +48,7 @@ public class ApplicationController {
         return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
     }
     
-    //@FilterWith({AuthorizationFilter.class})
+    @FilterWith({AuthorizationFilter.class})
     public Result admin() {
     	return Results.html();
     }

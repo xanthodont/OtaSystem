@@ -100,7 +100,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 		session = sessionFactory.openSession();
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.first);
 		
-		return null; 
+		return (TEntity) query.where(condition).toList().get(0); 
 	}
 
 	@Override

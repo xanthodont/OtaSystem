@@ -1,7 +1,7 @@
 <#import "../layout/loginLayout.ftl.html" as layout> 
 <@layout.myLayout "Login Page">    
 <div class="logo">
-	<img src="/assets/media/image/logo-big.png" alt="" /> 
+	<img src="/assets/image/logo.png" alt="" /> 
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -41,16 +41,9 @@
 			</button>            
 		</div>
 		<div class="forget-password">
-			<h4>Forgot your password ?</h4>
+			<h4>${i18n("login.notAccount")} - ${i18n("login.forgetPassword")}</h4>
 			<p>
-				no worries, click <a href="javascript:;" class="" id="forget-password">here</a>
-				to reset your password.
-			</p>
-		</div>
-		<div class="create-account">
-			<p>
-				Don't have an account yet ?&nbsp; 
-				<a href="javascript:;" id="register-btn" class="">${i18n("register")}</a>
+				${i18n("login.linkAdministrator")} <a href="javascript:;" class="" id="link-administrator">ota@konka.com</a>
 			</p>
 		</div>
 	</form>

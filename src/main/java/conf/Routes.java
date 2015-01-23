@@ -56,10 +56,12 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/user/account").with(AccountController.class, "list");
         //router.GET().route("/user/privilege").with(AccountController.class, "index");
 
-        router.GET().route("/account/profile/{accountId}").with(AccountController.class, "profile");
-        router.GET().route("/account/login").with(AccountController.class, "login");
-        router.GET().route("/account/register").with(AccountController.class, "register");
+        router.GET().route("/user/account/profile/{accountId}").with(AccountController.class, "profile");
+        router.POST().route("/user/account/login").with(AccountController.class, "login");
+        router.GET().route("/user/account/logout").with(AccountController.class, "logout");
+        router.GET().route("/user/account/register").with(AccountController.class, "register");
         router.GET().route("/user/account/list").with(AccountController.class, "list");
+        router.GET().route("/user/account/edit").with(AccountController.class, "edit");
         router.GET().route("/user/account/add").with(AccountController.class, "add");
         
         router.GET().route("/ota/project").with(ProjectController.class, "index");

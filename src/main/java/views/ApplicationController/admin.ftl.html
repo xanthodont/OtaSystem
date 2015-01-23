@@ -1,9 +1,11 @@
-<#import "../layout/adminLayout.ftl.html" as layout> 
+<#import "../layout/adminLayout.ftl.html" as layout>
 <@layout.myLayout "Home Page">    
-
+<#assign hTitle = '${i18n("nav.dashboard")}'>
+<#assign hDescription = '${i18n("nav.dashboard.description")}'>
+<#assign navs = ['${hTitle}']>
+<#include "/views/layout/contentHeader.ftl.html" /> 
 
 <h1>${i18n("hello.world")}</h1>
-<p>${i18n("hello.world.json")}</p>
-<a href="/hello_world.json">Hello World Json</a>
+
 
 </@layout.myLayout>

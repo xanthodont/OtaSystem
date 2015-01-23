@@ -1,22 +1,24 @@
-<#import "/views/layout/adminLayout.ftl.html" as layout> 
+<#import "layout.ftl.html" as layout> 
 <@layout.myLayout "Home Page">    
+
+
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet box light-grey">
 	<div class="portlet-title">
 		<div class="caption"><i class="icon-globe"></i>${i18n("account.manage")}</div>
 		<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
+			
 			<a href="javascript:;" class="reload"></a>
-			<a href="javascript:;" class="remove"></a>
+			
 		</div>
 	</div>
 	<div class="portlet-body">
 		<div class="clearfix">
 			<div class="btn-group">
-				<button id="sample_editable_1_new" class="btn green">
+				<a id="sample_editable_1_new" href="/user/account/add" class="btn green">
 					${i18n("account.addnew")} <i class="icon-plus"></i>
-				</button>
+				</a>
 			</div>
 			<div class="btn-group pull-right">
 				<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>

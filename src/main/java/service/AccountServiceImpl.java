@@ -16,6 +16,7 @@ public class AccountServiceImpl implements IAccountService {
 		long count = accountDao.count(c -> c.equals("username", username));
 		if (count == 1) {
 			Account a = accountDao.first(c -> c.equals("username", username)); 
+			//System.out.println("password:"+a.getPassword() + " "+password);
 			if (a.getPassword().equals(password)) {
 				return true;
 			}

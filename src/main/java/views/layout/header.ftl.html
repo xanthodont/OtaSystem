@@ -4,7 +4,7 @@
 		<div class="container-fluid">
 			<!-- BEGIN LOGO -->
 			<a class="brand" href="index.html">
-			<img src="/assets/media/image/logo.png" alt="logo"/>
+			<img src="/assets/image/logo.png" alt="logo"/>
 			</a>
 			<!-- END LOGO -->
 			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -18,15 +18,15 @@
 				<li class="dropdown user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<img alt="" src="/assets/media/image/avatar1_small.jpg" />
-					<span class="username">{username}</span>
+					<span class="username">${session.username}</span>
 					<i class="icon-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="extra_profile.html"><i class="icon-user"></i>${i18n("header.user.profile")}</a></li>
-						<li><a href="page_calendar.html"><i class="icon-envelope"></i>${i18n("header.user.message")}</a></li>
+						<!-- <li><a href="page_calendar.html"><i class="icon-envelope"></i>${i18n("header.user.message")}</a></li> -->
 						<li class="divider"></li>
-						<li><a href="extra_lock.html"><i class="icon-lock"></i>${i18n("header.user.lockScreen")}</a></li>
-						<li><a href="login.html"><i class="icon-key"></i>${i18n("header.user.logOut")}</a></li>
+						<!-- <li><a href="extra_lock.html"><i class="icon-lock"></i>${i18n("header.user.lockScreen")}</a></li> -->
+						<li><a href="/user/account/logout"><i class="icon-key"></i>${i18n("header.user.logOut")}</a></li>
 					</ul>
 				</li>
 				<!-- END USER LOGIN DROPDOWN -->

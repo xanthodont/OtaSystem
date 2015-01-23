@@ -17,7 +17,7 @@ public class PrivilegeFilter implements Filter {
 	@Override
 	public Result filter(FilterChain filterChain, Context context) {
 		// TODO Auto-generated method stub
-		return null;
+		return filterChain.next(context);
 	}
 
 }

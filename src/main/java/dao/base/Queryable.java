@@ -35,7 +35,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	private LimitCondition limitCondition;
 	private OrderByCondition orderByCondition; 
 	
-	public enum OperateType { all, delete, update, first, count; }
+	public enum OperateType { all, select, delete, update, first, count; }
 	private OperateType opType;
 	
 	@Inject
@@ -138,11 +138,15 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		case all:
 			builder.append("FROM ").append(persistentClass.getName());
 			break;
+		case select:
+			builder.append("FROM ").append(persistentClass.getName());
+			break;	
 		case delete:
 			break;
 		case update:
 			break;
 		case first:
+			builder.append("FROM ").append(persistentClass.getName());
 			break;
 		case count:
 			builder.append("SELECT COUNT(*) FROM ").append(persistentClass.getName());
