@@ -1,7 +1,9 @@
-<#import "layout.ftl.html" as layout> 
-<@layout.myLayout "Home Page">    
+<#import "/views/layout/baseLayout.ftl.html" as layout>
+<@layout.header '${i18n("account.userlist")}'>  
+  
+</@layout.header>
 
-
+<@layout.content '${i18n("nav.userAuthority.user")}' '${i18n("nav.userAuthority.user.description")}'>
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet box light-grey">
 	<div class="portlet-title">
@@ -52,7 +54,7 @@
 						<#if act.email??>${act.email}
 						<#else>${i18n("notSetting")}</#if></a>
 					</td>
-					<td class="hidden-480">${act.registerTime}</td>
+					<td class="hidden-480 format" >${act.registerTime}</td>
 					<td ><span class="label label-success">Approved</span></td>
 					<td>
 						<a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a>
@@ -65,5 +67,8 @@
 	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->
+</@layout.content>
 
-</@layout.myLayout>
+<@layout.footer>
+
+</@layout.footer>

@@ -1,9 +1,11 @@
-<#macro myLayout title="Layout example">
+<#macro header title='${i18n("page.title")}'>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
-    <title>${title}</title>
+    <title>
+		${title} - ${i18n("page.title")}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -11,7 +13,7 @@
   	<!-- Bootstrap -->
     <!-- <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet"> -->
 	<link href="/assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-	<!-- media -->
+	<!-- begin media core -->
 	<link href="/assets/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="/assets/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 	<link href="/assets/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -20,15 +22,7 @@
 	<link href="/assets/media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 	<link href="/assets/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 	<link href="/assets/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- BEGIN PAGE LEVEL STYLES --> 
-	<link href="/assets/media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="/assets/media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
-	<link href="/assets/media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="/assets/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-	<link href="/assets/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-	
-	<link type="text/css" href="/assets/media/css/select2_metro.css" rel="stylesheet" />
-	<link type="text/css" href="/assets/media/css/chosen.css" rel="stylesheet" />
+	<!-- end media core -->
 	
 	<!--[if lte IE 6]>
   	<link rel="stylesheet" type="text/css" href="/assets/bsie/css/bootstrap-ie6.css">
@@ -44,7 +38,21 @@
       <script src="/assets/media/js/respond.min.js"></script>
       <script src="/assets/media/js/excanvas.min.js"></script>
     <![endif]-->
+    
+    <!-- BEGIN PAGE LEVEL STYLES --> 
+	<link href="/assets/media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+	<link href="/assets/media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="/assets/media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	
+    <link type="text/css" href="/assets/media/css/select2_metro.css" rel="stylesheet" />
+	<link type="text/css" href="/assets/media/css/chosen.css" rel="stylesheet" />
+	<!-- END PAGE LEVEL STYLES --> 
   </head>
+</#macro>	
+
+<#macro content htitle='' hdescription=''>
 <body class="page-header-fixed">
     <#include "header.ftl.html"/>
     
@@ -54,16 +62,23 @@
 		<div class="page-content">
 			<div class="container-fluid">
 				<div class="row-fluid">
-				<#nested/>
+					<div class="span12">
+						<h3 class="page-title">
+							${htitle} <small>${hdescription}</small> 
+						</h3>
+					</div>
+					
+					<#nested/>
+					
 				</div>
 			</div>
 		</div>
     </div>
 
     <#include "footer.ftl.html"/>
-    
-  
-        
+</#macro>	    
+
+<#macro footer>  
 	<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script> -->
     <!--[if lte IE 6]>
@@ -100,42 +115,25 @@
 	<script src="/assets/media/js/select2.min.js" type="text/javascript"></script>
 	<script src="/assets/media/js/chosen.jquery.min.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
+	<script src="/assets/js/common.js" type="text/javascript"></script>    
+	<script src="/assets/js/utils.js" type="text/javascript"></script>    
+	<script src="/assets/js/navigation.js" type="text/javascript"></script> 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="/assets/media/js/app.js" type="text/javascript"></script>
 	<script src="/assets/media/js/index.js" type="text/javascript"></script> 
 	<script src="/assets/media/js/table-managed.js" type="text/javascript"></script>   
 	<script src="/assets/media/js/form-validation.js" type="text/javascript"></script>   
 	
-	<!-- END PAGE LEVEL STYLES -->
 	
-	 
-	
-	<script src="/assets/js/utils.js" type="text/javascript"></script>    
-	<script src="/assets/js/navigation.js" type="text/javascript"></script>  
-</#macro>	
-
-<#macro script>
-	
-	<nested/>
-	
-	<!-- END PAGE LEVEL SCRIPTS -->  
 	<script>
 		jQuery(document).ready(function() {    
 		   App.init(); // initlayout and core plugins
 		   Navigation.init();
-		   TableManaged.init();
-		   //FormValidation.init();
-		   //Index.init();
-		   //Index.initJQVMAP(); // init index page's custom scripts
-		   //Index.initCalendar(); // init index page's custom scripts
-		   //Index.initCharts(); // init index page's custom scripts
-		   //Index.initChat();
-		   //Index.initMiniCharts();
-		   //Index.initDashboardDaterange();
-		   //Index.initIntro();
 		});
 	</script>
-	
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->  
+	<#nested/>
+	<!-- END PAGE LEVEL SCRIPTS -->  
 </body>
 </html>
 </#macro>

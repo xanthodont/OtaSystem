@@ -18,7 +18,6 @@ var Navigation = (function() {
 			if (p[1] in x) {
 				data.barMenu = i;
 				x[p[1]].filter(function(y, j) {
-					console.log(y);
 					if (p[2] == y) data.subMenu = j;
 				});
 			}

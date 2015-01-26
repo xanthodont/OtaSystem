@@ -1,11 +1,15 @@
-<#import "../layout/adminLayout.ftl.html" as layout>
-<@layout.myLayout "Home Page">    
-<#assign hTitle = '${i18n("nav.dashboard")}'>
-<#assign hDescription = '${i18n("nav.dashboard.description")}'>
-<#assign navs = ['${hTitle}']>
-<#include "/views/layout/contentHeader.ftl.html" /> 
+<#import "../layout/baseLayout.ftl.html" as layout>
+<@layout.header '${i18n("nav.dashboard")}'>  
+  
+</@layout.header>
 
-<h1>${i18n("hello.world")}</h1>
+<@layout.content '${i18n("nav.dashboard")}' '${i18n("nav.dashboard.description")}'>
 
 
-</@layout.myLayout>
+
+
+</@layout.content>
+
+<@layout.footer>
+
+</@layout.footer>

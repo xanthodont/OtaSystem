@@ -8,8 +8,14 @@
 <#include "/views/layout/contentHeader.ftl.html"/> 
 
 	<#nested/>
-	
-	
+<script src="/assets/js/user.js" type="text/javascript"></script>  	
+<script src="/assets/js/user.account.edit.js" type="text/javascript"></script>  
+<!-- END PAGE LEVEL SCRIPTS -->  
+<script>
+	jQuery(document).ready(function() {
+		AccountEdit.init();
+	}
+</script>	
 </@layout.myLayout>
 
 </#macro>

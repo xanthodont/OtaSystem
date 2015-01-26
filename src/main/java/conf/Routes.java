@@ -32,7 +32,7 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {  
         
-        router.GET().route("/").with(ApplicationController.class, "index");
+        router.GET().route("/").with(ApplicationController.class, "admin");
         router.GET().route("/test").with(ApplicationController.class, "test");
         router.GET().route("/login").with(ApplicationController.class, "login");
         router.GET().route("/admin").with(ApplicationController.class, "admin");
@@ -40,7 +40,6 @@ public class Routes implements ApplicationRoutes {
  
         ///////////////////////////////////////////////////////////////////////
         // AssetsEx (pictures / javascript)  
-        // ��չԭ�е�AssetsController���������֧�����û��棬ʵ��ǰ�������Ż�
         ///////////////////////////////////////////////////////////////////////    
         router.GET().route("/assets/webjars/{fileName: .*}").with(AssetsExController.class, "serveWebJars");
         router.GET().route("/assets/{fileName: .*}").with(AssetsExController.class, "serveStatic");
