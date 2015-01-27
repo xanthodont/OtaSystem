@@ -91,5 +91,10 @@ public class JPADatabase<TEntity> implements IDatabase<TEntity>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public IDatabase<TEntity> delete(ICondition condition) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

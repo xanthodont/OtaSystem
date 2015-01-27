@@ -17,6 +17,7 @@ var AccountEdit = (function(){
                     username: {
                         minlength: 5,
                         required: true
+                        
                     },
                     email: {
                         required: true,
@@ -53,7 +54,7 @@ var AccountEdit = (function(){
                 errorPlacement: function (error, element) { // render error placement for each input type
                     if (element.attr("name") == "education") { // for chosen elements, need to insert the error after the chosen container
                         error.insertAfter("#form_2_education_chzn");
-                    } else if (element.attr("name") == "membership") { // for uniform radio buttons, insert the after the given container
+                    } else if (element.attr("name") == "roleId") { // for uniform radio buttons, insert the after the given container
                         error.addClass("no-left-padding").insertAfter("#form_2_membership_error");
                     } else if (element.attr("name") == "service") { // for uniform checkboxes, insert the after the given container
                         error.addClass("no-left-padding").insertAfter("#form_2_service_error");
@@ -81,7 +82,7 @@ var AccountEdit = (function(){
                 },
 
                 success: function (label) {
-                    if (label.attr("for") == "service" || label.attr("for") == "membership") { // for checkboxes and radip buttons, no need to show OK icon
+                    if (label.attr("for") == "service" || label.attr("for") == "roleId") { // for checkboxes and radip buttons, no need to show OK icon
                         label
                             .closest('.control-group').removeClass('error').addClass('success');
                         label.remove(); // remove error label here
@@ -95,6 +96,26 @@ var AccountEdit = (function(){
                 submitHandler: function (form) {
                     success2.show();
                     error2.hide();
+                    var name = $(form).find('input[name="username"]').val();
+                    var pswd = $(form).find('input[name="password"]').val();
+                    var email = $(form).find('input[name="email"]').val();
+                    var roleId = $(form).find('input[name="roleId"]').val();
+                    $.ajax({
+                    	url: '/user/account/save',
+                    	type: 'POST',
+                    	data: {username: name, password: pswd, email: email, roleId: roleId},
+                    	dataType: 'JSON',
+                    	error: function() {},
+                    	success: function(resp) {
+                    		if (resp.code == constants.code.success) {
+                                window.location.href = resp.msg;
+                            } else {
+                            	success2.hide();
+                            	$('.alert-error', form2).children('span').html(resp.msg);
+                            	$('.alert-error', form2).show();
+                            }
+                    	}
+                    });
                 }
 
             });

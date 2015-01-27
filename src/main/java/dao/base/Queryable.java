@@ -107,6 +107,12 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return query;
 	}
 	
+	public int exec() {
+		int r = getQuery().executeUpdate();
+		session.close();
+		return r;
+	}
+	
 	public long toCount() {
 		List<TEntity> list = getQuery().list();
 		long count = (long) list.get(0);
@@ -142,6 +148,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 			builder.append("FROM ").append(persistentClass.getName());
 			break;	
 		case delete:
+			builder.append("DELETE FROM ").append(persistentClass.getName());
 			break;
 		case update:
 			break;

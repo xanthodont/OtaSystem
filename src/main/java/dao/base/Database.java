@@ -64,6 +64,14 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 		//session.getTransaction().commit();
 		return this;
 	}
+	@Override
+	public IDatabase<TEntity> delete(ICondition condition) {
+		// TODO Auto-generated method stub
+		session = sessionFactory.openSession();
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.delete);
+		query.exec();
+		return this;
+	}
 
 	@Override
 	public IDatabase<TEntity> update(TEntity... entities) {
@@ -116,5 +124,6 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 }

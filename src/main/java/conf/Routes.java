@@ -34,7 +34,8 @@ public class Routes implements ApplicationRoutes {
         
         router.GET().route("/").with(ApplicationController.class, "admin");
         router.GET().route("/test").with(ApplicationController.class, "test");
-        router.GET().route("/login").with(ApplicationController.class, "login");
+        router.GET().route("/login").with(ApplicationController.class, "loginPage");
+        router.POST().route("/user/account/login").with(ApplicationController.class, "login");
         router.GET().route("/admin").with(ApplicationController.class, "admin");
         
  
@@ -44,7 +45,7 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/assets/webjars/{fileName: .*}").with(AssetsExController.class, "serveWebJars");
         router.GET().route("/assets/{fileName: .*}").with(AssetsExController.class, "serveStatic");
         
-        ///////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////// 
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
         //router.GET().route("/.*").with(ApplicationController.class, "index"); 
@@ -53,17 +54,20 @@ public class Routes implements ApplicationRoutes {
 		// Area Extension by xanthodont 
 		///////////////////////////////////////////////////////////////////////
         router.GET().route("/user/account").with(AccountController.class, "list");
-        //router.GET().route("/user/privilege").with(AccountController.class, "index");
+        //router.GET().route("/user/privilege").with(AccountController.class, "index"); 
 
         router.GET().route("/user/account/profile/{accountId}").with(AccountController.class, "profile");
-        router.POST().route("/user/account/login").with(AccountController.class, "login");
         router.GET().route("/user/account/logout").with(AccountController.class, "logout");
-        router.GET().route("/user/account/register").with(AccountController.class, "register");
+        router.POST().route("/user/account/delete").with(AccountController.class, "delete");
         router.GET().route("/user/account/list").with(AccountController.class, "list");
         router.GET().route("/user/account/edit").with(AccountController.class, "edit");
         router.GET().route("/user/account/add").with(AccountController.class, "add");
+        router.POST().route("/user/account/save").with(AccountController.class, "save");
         
-        router.GET().route("/ota/project").with(ProjectController.class, "index");
+        router.GET().route("/ota/project").with(ProjectController.class, "list");
+        router.GET().route("/ota/project/add").with(ProjectController.class, "add");
+        router.GET().route("/ota/project/getProperty").with(ProjectController.class, "getProperty");
+        router.GET().route("/ota/project/save").with(ProjectController.class, "save");
         router.GET().route("/ota/version").with(VersionController.class, "index");
     }
 

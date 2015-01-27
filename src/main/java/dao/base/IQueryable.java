@@ -10,6 +10,10 @@ public interface IQueryable<TEntity> extends List {
 	String toSqlString();
 	
 	long toCount();
+	int exec();
+	
+	IQueryable and(ICondition and);
+	IQueryable or(ICondition or);
 	
 	List<TEntity> toList();
 	

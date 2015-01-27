@@ -19,11 +19,13 @@ import ninja.session.FlashScope;
 import ninja.session.Session;
 import areas.user.models.Account;
 import areas.user.models.Profile;
+import areas.user.models.Role;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import controllers.ApplicationController;
 import dao.AccountDao;
 import dao.IBasicDao;
 import dao.base.IDatabase;
@@ -36,6 +38,8 @@ public class AccountController {
 	private IDatabase<Account> accountDao;
 	@Inject
 	private IAccountService accountService;
+	@Inject
+	private IDatabase<Role> roleDao;
 	
 	private Messages msg;
 	private Optional<String> language;
@@ -59,17 +63,6 @@ public class AccountController {
 	
 	
 	
-	public Result login(
-			@Param("username") String username, 
-			@Param("password") String password,
-			Session session) {
-		if (accountService.validateCredentials(username, password)) {
-			session.put(AuthorizationFilter.USERNAME, username);
-			return Results.json().render(JResponse.success("/admin"));
-		} else {
-			return Results.json().render(JResponse.fail(msg.get("login.notice.fail", language).get()));
-		}
-	}
 	
 	public Result logout(Session session) {
 		session.remove(AuthorizationFilter.USERNAME);
@@ -81,11 +74,24 @@ public class AccountController {
 		List<Account> accounts = accountDao.all().toList();
 		long count = accounts.size();
 		flashScope.put("count", count);
+		
 		return Results.html().render("accounts", accounts);
 	}
 	
 	public Result edit() {
-		return Results.html();
+		List<Role> roles = roleDao.all().toList(); 
+		return Results.html().render("roles", roles);
+	}
+	
+	public Result save(Account account, @Param(value="roleId") long roleId) {
+		if (accountService.validateUsernameUnique(account.getUsername())) {
+			account.setRegisterTime(System.currentTimeMillis());
+			account.setRole(roleDao.first(c -> c.equals("id", roleId)));
+			accountDao.insert(account).commit();
+			return Results.json().render(JResponse.success("/user/account/list"));
+		} else {
+			return Results.json().render(JResponse.fail(msg.get("account.usernameNotUnique", language).get()));
+		}
 	}
 	
 	@FilterWith(AuthorizationFilter.class)
@@ -101,7 +107,13 @@ public class AccountController {
 		return Results.redirect("/user/account/edit"); 
 	}
 	
-	public Result register() {
-		return Results.html();
+	public Result delete(@Param(value="id") String id) {
+		Account a = accountDao.first(c -> c.equals("id", id));
+		if (a == null) {
+			return Results.json().render(JResponse.fail(""));
+		} else {
+			accountDao.delete(a).commit();
+			return Results.json().render(JResponse.success(""));
+		}
 	}
 }

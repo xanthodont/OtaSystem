@@ -9,6 +9,7 @@ public interface IDatabase<TEntity> {
 	IDatabase<TEntity> insert(TEntity... entities);
 	
 	IDatabase<TEntity> delete(TEntity... entities);
+	IDatabase<TEntity> delete(ICondition condition);
 	
 	IDatabase<TEntity> update(TEntity... entities);
 	

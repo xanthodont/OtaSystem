@@ -20,7 +20,7 @@
 	<form action="#" id="form_edit" class="form-horizontal">
 		<div class="alert alert-error hide">
 			<button class="close" data-dismiss="alert"></button>
-				${i18n("validation.fail")}
+		<span>${i18n("validation.fail")}</span>
 			</div>
 			<div class="alert alert-success hide">
 				<button class="close" data-dismiss="alert"></button>
@@ -68,14 +68,12 @@
 			<div class="control-group">
 				<label class="control-label">${i18n("register.role")}<span class="required">*</span></label>
 				<div class="controls">
+					<#list roles as r>
 					<label class="radio line">
-					<input type="radio" name="roleId" value="1" checked="checked" />
-						${i18n("role.guest")}
+					<input type="radio" name="roleId" value="${r.id}"  />
+						${r.roleName}
 					</label>
-					<label class="radio line">
-					<input type="radio" name="roleId" value="2" />
-						${i18n("role.administrator")}
-					</label> 
+					</#list>
 					<div id="form_2_membership_error"></div>
 				</div>
 			</div>

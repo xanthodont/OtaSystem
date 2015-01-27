@@ -29,9 +29,15 @@ public class Account {
 	@Column(name="registerTime")
 	private Long registerTime;
 	
+
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Profile profile;
+	
+	@ManyToOne
+	@JoinColumn(name="roleId", referencedColumnName="id")
+	private Role role;
 
 	public String getId() {
 		return Id;
@@ -55,7 +61,7 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	} 
 
 	public String getEmail() {
 		return email;
@@ -80,5 +86,16 @@ public class Account {
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
+	
+	
+	public Role getRole() {
+		return this.role; 
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	
+	
 	
 }

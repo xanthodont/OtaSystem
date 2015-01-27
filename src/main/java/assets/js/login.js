@@ -21,10 +21,10 @@ var Login = function () {
 
 	            messages: {
 	                username: {
-	                    required: lang.login.requiredUsername
+	                    required: lang.account.requiredUsername
 	                },
 	                password: {
-	                    required: lang.login.requiredPassword
+	                    required: lang.account.requiredPassword
 	                }
 	            },
 
@@ -47,7 +47,7 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	            	var name = $( form).find('input[name="username"]').val();
+	            	var name = $(form).find('input[name="username"]').val();
                     var pswd = $(form).find('input[name="password"]').val();
                     $.ajax({
                     	url: '/user/account/login',
@@ -55,11 +55,11 @@ var Login = function () {
                         data: {username: name, password: pswd},
                         dataType: 'json',
                         error: function(reps) {},
-                        success: function(reps) {
-                            if (reps.code == constants.code.success) {
-                                window.location.href = reps.msg;
+                        success: function(resp) {
+                            if (resp.code == constants.code.success) {
+                                window.location.href = resp.msg;
                             } else {
-                            	$('.alert-error', $('.login-form')).children('span').html(reps.msg);
+                            	$('.alert-error', $('.login-form')).children('span').html(resp.msg);
                             	$('.alert-error', $('.login-form')).show();
                             }
                         }

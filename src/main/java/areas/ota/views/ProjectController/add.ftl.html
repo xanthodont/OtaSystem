@@ -1,0 +1,70 @@
+<#import "/views/layout/baseLayout.ftl.html" as layout>
+<@layout.header '${i18n("nav.userAuthority.user")}'>  
+ 	
+</@layout.header>
+
+<@layout.content '${i18n("nav.userAuthority.user")}' '${i18n("nav.userAuthority.user.description")}'>
+<div class="portlet box green">
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-reorder"></i>${i18n("project.addnew")}</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+	<!-- BEGIN FORM-->
+
+	<form action="#" id="form_edit" class="form-horizontal">
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+		<span>${i18n("validation.fail")}</span>
+			</div>
+			<div class="alert alert-success hide">
+				<button class="close" data-dismiss="alert"></button>
+				${i18n("validation.success")}
+			</div>
+			<div class="control-group">
+				<label class="control-label">${i18n("oem")}</label>
+				<div class="controls">
+					<input type="hidden" id="select2_oem" class="span6 select2" name="oem">
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">${i18n("product")}</label>
+				<div class="controls">
+					<input type="hidden" id="select2_product" class="span6 select2" name="product">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">${i18n("language")}</label>
+				<div class="controls">
+					<input type="hidden" id="select2_language" class="span6 select2" name="language">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">${i18n("operator")}</label>
+				<div class="controls">
+					<input type="hidden" id="select2_operator" class="span6 select2" name="operator">
+				</div>
+			</div>
+
+			
+			<div class="form-actions">
+				<button type="submit" class="btn green">${i18n("submit")}</button>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
+
+</@layout.content>
+
+<@layout.footer>
+<script type="text/javascript" src="/assets/js/ota.project.add.js"></script>
+<script>
+	jQuery(document).ready(function() {    
+		ProjectAdd.init();
+	});
+</script>
+</@layout.footer>

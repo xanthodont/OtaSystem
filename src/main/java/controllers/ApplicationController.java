@@ -18,13 +18,19 @@ package controllers;
 
 import java.util.List;
 
+import service.IAccountService;
+import models.JResponse;
 import ninja.BasicAuthFilter;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.SecureFilter;
+import ninja.i18n.Messages;
+import ninja.params.Param;
+import ninja.session.Session;
 import areas.user.models.Account;
 
+import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -34,18 +40,40 @@ import filters.AuthorizationFilter;
 
 @Singleton
 public class ApplicationController {
-	
+	@Inject
+	private IAccountService accountService;
+	private Messages msg;
+	private Optional<String> language;
+	private Optional<Result> optResult;
 	//@Inject
 	//private IBasicDao<Account> dao;
 	
+	@Inject
+	public ApplicationController(Messages msg) {
+		this.msg = msg;
+
+		language = Optional.of("zh-CN");
+        optResult = Optional.absent();
+	}
 	
+	public Result login(
+			@Param("username") String username, 
+			@Param("password") String password,
+			Session session) {
+		if (accountService.validateCredentials(username, password)) {
+			session.put(AuthorizationFilter.USERNAME, username);
+			return Results.json().render(JResponse.success("/admin"));
+		} else {
+			return Results.json().render(JResponse.fail(msg.get("login.notice.fail", language).get()));
+		}
+	}
 	
-	public Result login() {
-		return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
+	public Result loginPage() {
+		return Results.html();
 	}
 
     public Result index(Account account) {
-        return Results.html().addHeader(Result.CACHE_CONTROL, "max-age=30");
+        return Results.html();
     }
     
     @FilterWith({AuthorizationFilter.class})

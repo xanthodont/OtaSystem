@@ -1,13 +1,16 @@
 /**
  * 
  */
-lang = {
+var lang = {
 	account: {
 		requiredUsername: '请填写用户名',
 		requiredPassword: '请填写密码',
 		requiredEmail: '请填写邮箱',
 		correctEmail: '邮箱格式不正确',
 		rtPasswordEquals: '确认密码不正确'
+	},
+	sys: {
+		sure_delete: '确认删除？'
 	}
 };
 

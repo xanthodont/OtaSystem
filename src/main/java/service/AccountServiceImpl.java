@@ -23,6 +23,13 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean validateUsernameUnique(String username) {
+		// TODO Auto-generated method stub
+		long count = accountDao.count(c -> c.equals("username", username));
+		return count < 1;
+	}
 	
 	
 }
