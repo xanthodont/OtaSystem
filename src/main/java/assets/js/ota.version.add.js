@@ -1,4 +1,4 @@
-var ProjectAdd = function () {
+var VersionAdd = function () {
 	var handleSelec2Init = function () {
 		function queryFilter(hId, results) {
 			$(hId).select2({
@@ -8,7 +8,6 @@ var ProjectAdd = function () {
 	            	var data = {
 	                    results: []
 	                };
-	            	data.results.push({id: query.term, text: query.term});
 	            	var rs = results.filter(function(x) {return x.text.match(query.term);});
 	            	for (var i = 0, len = rs.length;  i < len; i++) {
 	            		data.results.push(rs[i]);
@@ -19,27 +18,22 @@ var ProjectAdd = function () {
 		}
 		function ajaxResults(propertyName, results) {
 			$.ajax({
-				url: '/ota/project/getProperty',
+				url: '/ota/project/list',
 				type: 'GET',
-				data: {propertyName: propertyName},
+				data: {},
 				dataType: 'JSON',
 				success: function(resp) {
-					for (var i = 0, len = resp.length; i < len; i++) {
-						results.push({id: resp[i], text: resp[i]});
+					//console.log(resp);
+					for (var i = 0, len = resp.projects.length; i < len; i++) {
+						results.push({id: resp.projects[i].id, text: resp.projects[i].projectName});
 					}
 				}
 			});
 		}
-		var	oemResults = [], productResults = [], languageResults = [], operatorResults = [];
-		ajaxResults('oem', oemResults);
-		ajaxResults('product', productResults);
-		ajaxResults('language', languageResults);
-		ajaxResults('operator', operatorResults);
+		var	projectResults = [];
+		ajaxResults('', projectResults);
 		
-		queryFilter('#select2_oem', oemResults);
-		queryFilter('#select2_product', productResults);
-		queryFilter('#select2_language', languageResults);
-		queryFilter('#select2_operator', operatorResults);
+		queryFilter('#select2_projectId', projectResults);
     }
 	
 	function formInit() {
@@ -53,16 +47,16 @@ var ProjectAdd = function () {
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
-            	projectName: {
-            		required: true
-            	},
-                oem: {
+                projectId: {
                     required: true
                 }, 
-                product: {
+                buildNumber: {
                 	required: true
                 },
-                language: {
+                versionName: {
+                	required: true
+                }, 
+                androidVersion: {
                 	required: true
                 }
             },
@@ -99,29 +93,35 @@ var ProjectAdd = function () {
                     .closest('.control-group').removeClass('success').addClass('error'); // set error class to the control group
             },
             submitHandler: function (form) {
-            	 success.show();
-                 error.hide();
-                 var projectName = $(form).find('input[name="projectName"]').val();
-                 var oem = $(form).find('input[name="oem"]').val();
-                 var product = $(form).find('input[name="product"]').val();
-                 var language = $(form).find('input[name="language"]').val();
-                 var operator = $(form).find('input[name="operator"]').val();
-                 $.ajax({
-                 	url: '/ota/project/save',
-                 	type: 'POST',
-                 	data: {projectName: projectName, oem: oem, product: product, language: language, operator: operator},
-                 	dataType: 'JSON',
-                 	error: function() {},
-                 	success: function(resp) {
-                 		if (resp.code == constants.code.success) {
-                             window.location.href = resp.msg;
-                         } else {
-                         	success.hide();
-                         	$('.alert-error', form).children('span').html(resp.msg);
-                         	$('.alert-error', form).show();
-                         }
-                 	}
-                 });
+            	success.show();
+            	error.hide();
+            	var projectId = $(form).find('input[name="projectId"]').val();
+            	var buildNumber = $(form).find('input[name="buildNumber"]').val();
+            	var versionName = $(form).find('input[name="versionName"]').val();
+            	var androidVersion = $(form).find('input[name="androidVersion"]').val();
+            	var description = $(form).find('textarea[name="description"]').val();
+            	$.ajax({
+		         	url: '/ota/version/save',
+		         	type: 'POST',
+		         	data: {
+		         		projectId: projectId, 
+		         		buildNumber: buildNumber, 
+		         		versionName: versionName, 
+		         		androidVersion: androidVersion, 
+		         		description: description
+		         	},
+		         	dataType: 'JSON',
+		         	error: function() {},
+		         	success: function(resp) {
+		         		if (resp.code == constants.code.success) {
+		                     window.location.href = resp.msg;
+		                 } else {
+		                 	success.hide();
+		                 	$('.alert-error', form).children('span').html(resp.msg);
+		                 	$('.alert-error', form).show();
+		                 }
+		         	}
+	            });
             }
         });
         

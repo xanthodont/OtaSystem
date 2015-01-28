@@ -28,6 +28,7 @@
 			<thead>
 				<tr>
 					<th style="width:8px;">#</th>
+					<th>${i18n("project.projectName")}</th>
 					<th>${i18n("project.oem")}</th>
 					<th class="hidden-480">${i18n("project.product")}</th>
 					<th class="hidden-480">${i18n("project.language")}</th>
@@ -41,6 +42,7 @@
 				<#list projects as p>
 				<tr class="odd gradeX">
 					<td>${i} <#assign i = i+1></td>
+					<td>${p.projectName}</td>
 					<td>${p.oem}</td>
 					<td class="hidden-480">${p.product}</td>
 					<td class="hidden-480 format" >${p.language}</td>
@@ -60,10 +62,10 @@
 </@layout.content>
 
 <@layout.footer>
-<!-- <script src="/assets/js/user.account.list.js" type="text/javascript"></script> -->  
+<script src="/assets/js/ota.project.list.js" type="text/javascript"></script> -->  
 <script>
 	jQuery(document).ready(function() {    
-		
+		ProjectList.init();	
 	});
 </script>
 </@layout.footer>

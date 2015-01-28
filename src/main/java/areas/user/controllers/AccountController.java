@@ -26,6 +26,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import controllers.ApplicationController;
+import controllers.BaseController;
 import dao.AccountDao;
 import dao.IBasicDao;
 import dao.base.IDatabase;
@@ -33,7 +34,7 @@ import filters.AuthorizationFilter;
 import filters.PrivilegeFilter;
 
 @Singleton
-public class AccountController {
+public class AccountController extends BaseController {
 	@Inject
 	private IDatabase<Account> accountDao;
 	@Inject
@@ -41,21 +42,9 @@ public class AccountController {
 	@Inject
 	private IDatabase<Role> roleDao;
 	
-	private Messages msg;
-	private Optional<String> language;
-	private Optional<Result> optResult;
-	//private List<String> contentNavs;
-	
 	@Inject
 	public AccountController(Messages msg) {
-		this.msg = msg;
-
-		language = Optional.of("zh-CN");
-        optResult = Optional.absent();
-        
-        //contentNavs = new ArrayList<String>();
-        //contentNavs.add(msg.get("nav.userAuthority", language).get());
-        //session.put("contentNavs", contentNavs);
+		super(msg);
 	}
 	
 	@Inject

@@ -22,7 +22,9 @@ import org.hibernate.cfg.Configuration;
 import service.AccountServiceImpl;
 import service.IAccountService;
 import ninja.UsernamePasswordValidator;
+import areas.ota.models.Delta;
 import areas.ota.models.Project;
+import areas.ota.models.Version;
 import areas.user.models.Account;
 import areas.user.models.Profile;
 import areas.user.models.Role;
@@ -32,11 +34,13 @@ import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 import dao.AccountDao;
+import dao.DeltaDao;
 import dao.HAccountDao;
 import dao.IBasicDao;
 import dao.ProfileDao;
 import dao.ProjectDao;
 import dao.RoleDao;
+import dao.VersionDao;
 import dao.base.IDatabase;
 
 @Singleton
@@ -52,7 +56,7 @@ public class Module extends AbstractModule {
 
 	private void configDatabases() {
 		// TODO Auto-generated method stub
-		bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());;
+		bind(SessionFactory.class).toInstance(new Configuration().configure().buildSessionFactory());
 	}
 
 	private void configDaos() {
@@ -63,12 +67,18 @@ public class Module extends AbstractModule {
 	
 		bind(new TypeLiteral<IDatabase<Profile>>() {})
 			.to(new TypeLiteral<ProfileDao>(){});
-	
+	 
 		bind(new TypeLiteral<IDatabase<Role>>() {})
 		.to(new TypeLiteral<RoleDao>(){});
 		
 		bind(new TypeLiteral<IDatabase<Project>>() {})
 		.to(new TypeLiteral<ProjectDao>(){});
+		
+		bind(new TypeLiteral<IDatabase<Version>>() {})
+		.to(new TypeLiteral<VersionDao>(){});
+		
+		bind(new TypeLiteral<IDatabase<Delta>>() {})
+		.to(new TypeLiteral<DeltaDao>(){});
 	}
 	
 	private void configServices() {

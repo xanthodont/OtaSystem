@@ -11,6 +11,12 @@ var lang = {
 	},
 	sys: {
 		sure_delete: '确认删除？'
+	}, 
+	delta: {
+		sure_pass: '确认通过测试？',
+		sure_publish: '确认发布？',
+		sure_retest: '确认重新测试？',
+		sure_undo: '确认撤销发布？'
 	}
 };
 

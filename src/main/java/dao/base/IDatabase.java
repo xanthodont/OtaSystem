@@ -15,11 +15,12 @@ public interface IDatabase<TEntity> {
 	
 	void commit(); 
 	
-	IQueryable<TEntity> where();
+	IQueryable<TEntity> where(ICondition condition);
 	
 	TEntity first();
 	
-	long count(ICondition condition);
+	long count(ICondition... condition);
+	IQueryable<TEntity> count();
 
 	TEntity first(ICondition condition);
 }

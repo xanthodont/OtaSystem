@@ -22,6 +22,7 @@ package conf;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import areas.user.controllers.AccountController;
+import areas.ota.controllers.DeltaController;
 import areas.ota.controllers.ProjectController;
 import areas.ota.controllers.VersionController;
 import controllers.ApplicationController;
@@ -65,10 +66,22 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/user/account/save").with(AccountController.class, "save");
         
         router.GET().route("/ota/project").with(ProjectController.class, "list");
+        router.GET().route("/ota/project/list").with(ProjectController.class, "list");
         router.GET().route("/ota/project/add").with(ProjectController.class, "add");
         router.GET().route("/ota/project/getProperty").with(ProjectController.class, "getProperty");
-        router.GET().route("/ota/project/save").with(ProjectController.class, "save");
-        router.GET().route("/ota/version").with(VersionController.class, "index");
+        router.POST().route("/ota/project/save").with(ProjectController.class, "save");
+        router.POST().route("/ota/project/delete").with(ProjectController.class, "delete");
+        
+        
+        router.GET().route("/ota/version").with(VersionController.class, "list");
+        router.GET().route("/ota/version/list").with(VersionController.class, "list");
+        router.GET().route("/ota/version/add").with(VersionController.class, "add");
+        router.POST().route("/ota/version/save").with(VersionController.class, "save");
+        router.POST().route("/ota/version/delete").with(VersionController.class, "delete");
+        
+        router.GET().route("/ota/delta").with(DeltaController.class, "list");
+        router.GET().route("/ota/delta/list").with(DeltaController.class, "list");
+        router.POST().route("/ota/delta/setStatus").with(DeltaController.class, "setStatus");
     }
 
 }

@@ -2,7 +2,10 @@ package dao.base;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
+
+import javax.inject.Singleton;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -35,7 +38,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	@Override
 	public IQueryable<TEntity> all() {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
+		session = sessionFactory.openSession(); 
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.all);
 		
 		return query;
@@ -44,7 +47,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	@Override
 	public IDatabase<TEntity> insert(TEntity... entities) {
 		// TODO Auto-generated method stub
-		session = sessionFactory.openSession();
+		session = sessionFactory.openSession(); 
 		session.beginTransaction();
 		for (TEntity entity : entities) {
 			session.save(entity);
@@ -93,7 +96,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	}
 
 	@Override
-	public IQueryable<TEntity> where() {
+	public IQueryable<TEntity> where(ICondition condition) {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession();
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.all);
@@ -107,16 +110,28 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession();
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.first);
-		
-		return (TEntity) query.where(condition).toList().get(0); 
+		List<TEntity> list = query.where(condition).toList();
+		if (list.size() == 0) return null;
+		return (TEntity) list.get(0); 
 	}
 
 	@Override
-	public long count(ICondition condition) {
+	public long count(ICondition... conditions) {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession();
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.count);
-		return query.where(condition).toCount();
+		for (ICondition condition : conditions) {
+			query.and(condition);
+		}
+		return query.toCount();
+	}
+	@Override
+	public IQueryable<TEntity> count() {
+		// TODO Auto-generated method stub
+		session = sessionFactory.openSession();
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.count);
+		
+		return query;
 	}
 	
 	@Override
@@ -124,6 +139,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	
 
 }

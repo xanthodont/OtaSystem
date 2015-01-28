@@ -55,7 +55,7 @@ public class AuthorizationFilter implements Filter{
 					return filterChain.next(context);
 				} 
 			}
-    		return Results.forbidden().html().template("/views/ApplicationController/login.ftl.html");
+    		return Results.forbidden().html().template("/views/ApplicationController/loginPage.ftl.html");
     	} else {
     		return filterChain.next(context);
     	}

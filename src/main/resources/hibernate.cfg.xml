@@ -15,7 +15,9 @@
         <mapping class="areas.user.models.Profile"/>  
         <mapping class="areas.user.models.Role"/>
         
-        <mapping class="areas.ota.models.Project"/>    
+        <mapping class="areas.ota.models.Project"/>  
+        <mapping class="areas.ota.models.Version"/>    
+        <mapping class="areas.ota.models.Delta"/>    
     </session-factory>
     
 </hibernate-configuration>

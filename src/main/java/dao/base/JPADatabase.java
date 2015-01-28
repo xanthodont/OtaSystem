@@ -69,7 +69,7 @@ public class JPADatabase<TEntity> implements IDatabase<TEntity>{
 	}
 
 	@Override
-	public IQueryable<TEntity> where() {
+	public IQueryable<TEntity> where(ICondition condition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -81,10 +81,15 @@ public class JPADatabase<TEntity> implements IDatabase<TEntity>{
 	}
 
 	@Override
-	public long count(ICondition condition) {
+	public long count(ICondition... condition) {
 		// TODO Auto-generated method stub
 		
 		return 0;
+	}
+	@Override
+	public IQueryable<TEntity> count() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@Override
 	public TEntity first() {

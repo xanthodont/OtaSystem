@@ -1,11 +1,25 @@
 package areas.ota.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import areas.user.models.Account;
 
 @Entity
 @Table(name="project")
@@ -13,6 +27,9 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@Column(name="projectName", length=100)
+	private String projectName;
 	
 	@Column(name="oem", length=20)
 	private String oem;
@@ -31,6 +48,11 @@ public class Project {
 	
 	@Column(name="description")
 	private String description;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="projectId", referencedColumnName="id")
+	@JsonIgnore
+	private Set<Version> versions; 
 
 	public long getId() {
 		return id;
@@ -38,6 +60,14 @@ public class Project {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	public String getOem() {
@@ -86,6 +116,14 @@ public class Project {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<Version> getVersions() {
+		return versions;
+	}
+
+	public void setVersions(Set<Version> versions) {
+		this.versions = versions;
 	}
 	
 	
