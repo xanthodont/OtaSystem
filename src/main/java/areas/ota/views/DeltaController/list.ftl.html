@@ -1,6 +1,8 @@
 <#import "/views/layout/baseLayout.ftl.html" as layout>
 <@layout.header '${i18n("ota.delta")}'>  
-  
+   <link href="/assets/media/css/jquery.fancybox.css" rel="stylesheet" />
+	<link href="/assets/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+   
 </@layout.header>
 
 <@layout.content '${i18n("nav.ota.delta")}' '${i18n("nav.ota.delta.description")}'>
@@ -18,9 +20,6 @@
 	<div class="portlet-body">
 		<div class="clearfix">
 			<div class="btn-group">
-				<a id="sample_editable_1_new" href="" class="btn green">
-					${i18n("delta.addnew")} <i class="icon-plus"></i>
-				</a>
 				<a id="sample_editable_2_new" href="#" class="btn blue">
 					${i18n("delta.addtestimei")} <i class="icon-plus"></i>
 				</a>
@@ -47,7 +46,7 @@
 				<tr class="odd gradeX">
 					<td>${i} <#assign i = i+1></td>
 					<td>${d.fromVersion.versionName}</td>
-					<td> -> </td>
+					<td> <span class="glyphicons no-js right_arrow"><i></i></span> </td>
 					<td class="hidden-480">${d.toVersion.versionName}</td>
 					<td class="hidden-480 format" >${d.updateTime}</td>
 					<td class="hidden-480 format" >${d.size}</td>
@@ -77,16 +76,16 @@
 					<td>
 						<#switch d.status>
 							<#case 0>
-								<a href="javascript:;" class="btn mini blue" key="${d.id}">
+								<a href="javascript:;" class="btn mini blue upload" key="${d.id}">
 									<i class="icon-upload-alt"></i> ${i18n("delta.status_upload")}</a>
 							  	<#break>
 							<#case 1>
-								<a href="javascript:;" class="btn mini blue" key="${d.id}">
+								<a href="javascript:;" class="btn mini blue reupload" key="${d.id}">
 									<i class="icon-upload-alt"></i> ${i18n("delta.status_reupload")}</a>
 								<#break>
 							<#case 2>
-								<a href="javascript:;" class="btn mini red reupload" key="${d.id}">
-									<i class="icon-remove"></i> ${i18n("delta.status_reupload")}</a>
+								<a href="javascript:;" class="btn mini purple reupload" key="${d.id}">
+									<i class="icon-upload-alt"></i> ${i18n("delta.status_reupload")}</a>
 								<a href="javascript:;" class="btn mini green pass" key="${d.id}">
 									<i class="icon-ok"></i> ${i18n("delta.status_pass")}</a>
 								<#break>
@@ -110,15 +109,24 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<div id="dialog-form" title="${i18n('delta.uploadfile')}">
+		
+		<#include "simpleFileUpload.ftl.html"/> 
+	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->
+
 </@layout.content>
 
 <@layout.footer>
+
+
 <script src="/assets/js/ota.delta.list.js" type="text/javascript"></script> -->  
 <script>
 	jQuery(document).ready(function() {    
 		DeltaList.init();	
+		//FormFileUpload.init();
 	});
 </script>
 </@layout.footer>

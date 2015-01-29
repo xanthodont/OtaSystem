@@ -9,7 +9,7 @@ var FormFileUpload = function () {
             $('#fileupload').fileupload({
                 // Uncomment the following to send cross-domain cookies:
                 //xhrFields: {withCredentials: true},
-                url: 'assets/plugins/jquery-file-upload/server/php/'
+                url: '/ota/delta/uploadfile'
             });
 
             // Load existing files:
@@ -35,16 +35,18 @@ var FormFileUpload = function () {
                     }
                 ]
             }).done(function (result) {
-                $(this).fileupload('option', 'done')
+                /*
+            	$(this).fileupload('option', 'done')
                     .call(this, null, {
                     result: result
-                });
+                });*/
             });
 
+            /*
             // Upload server status check for browsers with CORS support:
             if ($.support.cors) {
                 $.ajax({
-                    url: 'assets/plugins/jquery-file-upload/server/php/',
+                    url: '/ota/delta/uploadfile',
                     type: 'HEAD'
                 }).fail(function () {
                     $('<span class="alert alert-error"/>')
@@ -52,7 +54,7 @@ var FormFileUpload = function () {
                         new Date())
                         .appendTo('#fileupload');
                 });
-            }
+            }*/
 
             // initialize uniform checkboxes  
             App.initUniform('.fileupload-toggle-checkbox');

@@ -1,0 +1,23 @@
+<form id="fileupload" method="POST" enctype="multipart/form-data" action="/ota/delta/uploadfile">
+   <fieldset>
+     <label for="name"></label>
+     <div class="controls">
+	 	<div class="fileupload fileupload-new" data-provides="fileupload">
+			<div class="input-append">
+				<div class="uneditable-input">
+				<i class="icon-file fileupload-exists"></i> 
+				<span class="fileupload-preview"></span>
+			</div>
+			<span class="btn btn-file">
+				<span class="fileupload-new">${i18n("selectfile")}</span>
+				<span class="fileupload-exists">${i18n("changefile")}</span>
+				<input type="file" class="default" name="files" />
+			</span>
+			
+			<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">${i18n("removefile")}</a>
+	  		</div>
+	  		<div id="message"></div>
+   	 	</div>
+   	 </div>
+   </fieldset>
+</form>

@@ -82,6 +82,7 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/ota/delta").with(DeltaController.class, "list");
         router.GET().route("/ota/delta/list").with(DeltaController.class, "list");
         router.POST().route("/ota/delta/setStatus").with(DeltaController.class, "setStatus");
+        router.POST().route("/ota/delta/uploadfile/{deltaId}").with(DeltaController.class, "uploadfile");
     }
 
 }

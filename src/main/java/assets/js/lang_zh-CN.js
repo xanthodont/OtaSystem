@@ -10,7 +10,11 @@ var lang = {
 		rtPasswordEquals: '确认密码不正确'
 	},
 	sys: {
-		sure_delete: '确认删除？'
+		sure_delete: '确认删除？',
+		cancel: '取消',
+		upload_file: '上传文件',
+		file_upload_success: '文件上传成功！！！',
+		file_uploading: '文件上传中...'
 	}, 
 	delta: {
 		sure_pass: '确认通过测试？',

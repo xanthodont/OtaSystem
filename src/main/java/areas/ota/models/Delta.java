@@ -31,7 +31,7 @@ public class Delta {
 	private long updateTime;
 	
 	@Column(name="size")
-	private int size;
+	private long size;
 	
 	@Column(name="status")
 	private int status;
@@ -71,11 +71,11 @@ public class Delta {
 		this.updateTime = updateTime;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		this.size = size;
 	}
 
@@ -94,4 +94,11 @@ public class Delta {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
+	
+	public class Status {
+		public static final int INIT = 0;
+		public static final int TESTING = 2;
+		public static final int PUBLISHING = 4;
+		public static final int PUBLISHED = 5;
+	} 
 }

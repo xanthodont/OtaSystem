@@ -1,0 +1,29 @@
+<form id="fileupload" method="POST" enctype="multipart/form-data">
+   <fieldset>
+     <label for="name"></label>
+     <div class="controls">
+	 	<div class="fileupload fileupload-new" data-provides="fileupload">
+			<div class="input-append">
+				<div class="uneditable-input">
+					<i class="icon-file fileupload-exists"></i> 
+					<span class="fileupload-preview"></span>
+				</div>
+				<span class="btn btn-success fileinput-button">
+	      				<i class="icon-plus icon-white"></i>
+	      				<span>${i18n("selectfile")}</span>
+	      				<input id="fileupload" type="file" name="files[]" multiple>
+	  				</span>
+	
+				
+				 
+				<!-- ½ø¶ÈÌõ --> 
+				<div id="progress" class="progress progress-success progress-striped">
+					<div class="bar"></div>
+				</div>
+				<div id="files"></div>   
+				
+			</div>
+		</div>
+   	  </div>
+   </fieldset>
+ </form>
