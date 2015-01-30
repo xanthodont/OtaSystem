@@ -92,7 +92,7 @@ public class JPADatabase<TEntity> implements IDatabase<TEntity>{
 		return null;
 	}
 	@Override
-	public TEntity first() {
+	public IQueryable<TEntity> first() {
 		// TODO Auto-generated method stub
 		return null;
 	}

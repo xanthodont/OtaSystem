@@ -17,7 +17,7 @@ public interface IDatabase<TEntity> {
 	
 	IQueryable<TEntity> where(ICondition condition);
 	
-	TEntity first();
+	IQueryable<TEntity> first();
 	
 	long count(ICondition... condition);
 	IQueryable<TEntity> count();

@@ -14,8 +14,11 @@ public interface IQueryable<TEntity> extends List {
 	
 	IQueryable and(ICondition and);
 	IQueryable or(ICondition or);
+	IQueryable orderBy(boolean order, String... properties);
 	
 	List<TEntity> toList();
+	
+	TEntity toEntity();
 	
 	IPageList<TEntity> toPageList(); 
 }

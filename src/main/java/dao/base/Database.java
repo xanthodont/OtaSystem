@@ -12,7 +12,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.google.inject.Inject;
 
@@ -135,9 +134,11 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	}
 	
 	@Override
-	public TEntity first() {
+	public IQueryable<TEntity> first() {
 		// TODO Auto-generated method stub
-		return null;
+		session = sessionFactory.openSession();
+		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.first);
+		return query;
 	}
 	
 	

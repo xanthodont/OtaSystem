@@ -202,4 +202,13 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return builder.toString();
 	}
 
+	@Override
+	public TEntity toEntity() {
+		// TODO Auto-generated method stub
+		List<TEntity> list = getQuery().list();
+		session.close();
+		if (list.size() < 1) return null;
+		return list.get(0);
+	}
+
 }

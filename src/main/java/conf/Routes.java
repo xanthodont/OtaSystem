@@ -25,6 +25,7 @@ import areas.user.controllers.AccountController;
 import areas.ota.controllers.DeltaController;
 import areas.ota.controllers.ProjectController;
 import areas.ota.controllers.VersionController;
+import controllers.ApiController;
 import controllers.ApplicationController;
 import controllers.AssetsExController;
 
@@ -83,6 +84,11 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/ota/delta/list").with(DeltaController.class, "list");
         router.POST().route("/ota/delta/setStatus").with(DeltaController.class, "setStatus");
         router.POST().route("/ota/delta/uploadfile/{deltaId}").with(DeltaController.class, "uploadfile");
+        
+        /** API */
+        router.POST().route("/api/login").with(ApiController.class, "login");
+        router.GET().route("/api/checkversion").with(ApiController.class, "checkVersion");
+        router.GET().route("/api/download").with(ApiController.class, "download"); 
     }
 
 }

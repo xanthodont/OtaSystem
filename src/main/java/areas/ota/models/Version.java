@@ -43,6 +43,9 @@ public class Version {
 	@Column(name="androidVersion", length=20)
 	private String androidVersion;
 	
+	@Column(name="fingerprint", length=255)
+	private String fingerprint;
+	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="projectId", referencedColumnName="id")
 	private Project project; 
@@ -143,6 +146,14 @@ public class Version {
 
 	public void setToDeltas(Set<Delta> toDeltas) {
 		this.toDeltas = toDeltas;
+	}
+
+	public String getFingerprint() {
+		return fingerprint;
+	}
+
+	public void setFingerprint(String fingerprint) {
+		this.fingerprint = fingerprint;
 	}
 
 	
