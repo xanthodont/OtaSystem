@@ -34,11 +34,11 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {  
         
-        router.GET().route("/").with(ApplicationController.class, "admin");
-        router.GET().route("/test").with(ApplicationController.class, "test");
-        router.GET().route("/login").with(ApplicationController.class, "loginPage");
+        router.GET().route("/OtaSystem/").with(ApplicationController.class, "admin");
+        router.GET().route("/OtaSystem/test").with(ApplicationController.class, "test");
+        router.GET().route("/OtaSystem/login").with(ApplicationController.class, "loginPage");
         router.POST().route("/user/account/login").with(ApplicationController.class, "login");
-        router.GET().route("/admin").with(ApplicationController.class, "admin");
+        router.GET().route("/OtaSystem/admin").with(ApplicationController.class, "admin");
         
  
         ///////////////////////////////////////////////////////////////////////
