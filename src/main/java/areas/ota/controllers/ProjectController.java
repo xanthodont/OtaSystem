@@ -54,6 +54,14 @@ public class ProjectController extends BaseController{
 	}
 	
 	public Result save(Project project) {
+		/**
+		 * 处理字符
+		 */
+		project.setOem(project.getOem().replace("_", "$"));
+		project.setProduct(project.getProduct().replace("_", "$"));
+		project.setLanguage(project.getLanguage().replace("_", "$"));
+		project.setOperator(project.getOperator().replace("_", "$"));
+		
 		long count = projectDao.count()
 				.and(c -> c.equals("oem", project.getOem()))
 				.and(c -> c.equals("product", project.getProduct()))
@@ -65,7 +73,7 @@ public class ProjectController extends BaseController{
 		} else {
 			project.setUpdateTime(System.currentTimeMillis());
 			projectDao.insert(project).commit();
-			return Results.json().render(JResponse.success("/ota/project"));
+			return Results.json().render(JResponse.success("ota/project"));
 		} 
 	} 
 	
@@ -75,7 +83,7 @@ public class ProjectController extends BaseController{
 			return Results.json().render(JResponse.fail(""));
 		} else {
 			projectDao.delete(p).commit();
-			return Results.json().render(JResponse.success(""));
+			return Results.json().render(JResponse.success("ota/project"));
 		}
 	}
 	

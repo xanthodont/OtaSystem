@@ -49,7 +49,7 @@ public class Project {
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="projectId", referencedColumnName="id")
 	@JsonIgnore
 	private Set<Version> versions; 

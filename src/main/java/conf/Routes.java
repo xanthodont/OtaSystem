@@ -34,11 +34,12 @@ public class Routes implements ApplicationRoutes {
     @Override
     public void init(Router router) {  
         
-        router.GET().route("/OtaSystem/").with(ApplicationController.class, "admin");
-        router.GET().route("/OtaSystem/test").with(ApplicationController.class, "test");
-        router.GET().route("/OtaSystem/login").with(ApplicationController.class, "loginPage");
+        router.GET().route("/").with(ApplicationController.class, "admin");
+        router.GET().route("/test").with(ApplicationController.class, "test");
+        router.GET().route("/login").with(ApplicationController.class, "loginPage");
+        router.GET().route("/logout").with(ApplicationController.class, "logout");
         router.POST().route("/user/account/login").with(ApplicationController.class, "login");
-        router.GET().route("/OtaSystem/admin").with(ApplicationController.class, "admin");
+        router.GET().route("/admin").with(ApplicationController.class, "admin");
         
  
         ///////////////////////////////////////////////////////////////////////
@@ -59,7 +60,6 @@ public class Routes implements ApplicationRoutes {
         //router.GET().route("/user/privilege").with(AccountController.class, "index"); 
 
         router.GET().route("/user/account/profile/{accountId}").with(AccountController.class, "profile");
-        router.GET().route("/user/account/logout").with(AccountController.class, "logout");
         router.POST().route("/user/account/delete").with(AccountController.class, "delete");
         router.GET().route("/user/account/list").with(AccountController.class, "list");
         router.GET().route("/user/account/edit").with(AccountController.class, "edit");
@@ -87,8 +87,13 @@ public class Routes implements ApplicationRoutes {
         
         /** API */
         router.POST().route("/api/login").with(ApiController.class, "login");
-        router.GET().route("/api/checkversion").with(ApiController.class, "checkVersion");
-        router.GET().route("/api/download").with(ApiController.class, "download"); 
+        router.POST().route("/api/checkversion").with(ApiController.class, "checkVersion");
+        router.POST().route("/api/download").with(ApiController.class, "download"); 
+        /** 旧版API */
+        router.POST().route("/download/login.php").with(ApiController.class, "login");
+        router.POST().route("/download/checkversion.php").with(ApiController.class, "checkVersion");
+        router.POST().route("/download/downloadfullota.php").with(ApiController.class, "download");
+        router.POST().route("/download/download.php").with(ApiController.class, "download"); 
     }
 
 }

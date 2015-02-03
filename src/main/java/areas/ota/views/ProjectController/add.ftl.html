@@ -1,9 +1,9 @@
 <#import "/views/layout/baseLayout.ftl.html" as layout>
-<@layout.header '${i18n("nav.userAuthority.user")}'>  
+<@layout.header '${i18n("nav.ota.poject")}'>  
  	
 </@layout.header>
 
-<@layout.content '${i18n("nav.userAuthority.user")}' '${i18n("nav.userAuthority.user.description")}'>
+<@layout.content '${i18n("nav.ota.project")}' '${i18n("nav.ota.project.description")}'>
 <div class="portlet box green">
 	<div class="portlet-title">
 		<div class="caption"><i class="icon-reorder"></i>${i18n("project.addnew")}</div>
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	<div class="portlet-body form">
-	<!-- BEGIN FORM-->
+	<!-- BEGIN FORM--> 
 
 	<form action="#" id="form_add" class="form-horizontal">
 		<div class="alert alert-error hide">
@@ -24,38 +24,38 @@
 				${i18n("validation.success")}
 			</div>
 			<div class="control-group">
-				<label class="control-label">${i18n("projectName")}<span class="required">*</span></label>
+				<label class="control-label">${i18n("project.projectName")}<span class="required">*</span></label>
 				<div class="controls">
 					<input type="text" id="projectName" class="span6 select2" name="projectName">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">${i18n("oem")}<span class="required">*</span></label>
+				<label class="control-label">${i18n("project.oem")}<span class="required">*</span></label>
 				<div class="controls">
 					<input type="hidden" id="select2_oem" class="span6 select2" name="oem">
 				</div>
 			</div>
 
 			<div class="control-group">
-				<label class="control-label">${i18n("product")}<span class="required">*</span></label>
+				<label class="control-label">${i18n("project.product")}<span class="required">*</span></label>
 				<div class="controls">
 					<input type="hidden" id="select2_product" class="span6 select2" name="product">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">${i18n("language")}<span class="required">*</span></label>
+				<label class="control-label">${i18n("project.language")}<span class="required">*</span></label>
 				<div class="controls">
 					<input type="hidden" id="select2_language" class="span6 select2" name="language">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">${i18n("operator")}</label>
+				<label class="control-label">${i18n("project.operator")}</label>
 				<div class="controls">
 					<input type="hidden" id="select2_operator" class="span6 select2" name="operator">
 				</div>
 			</div>
 
-			
+			 
 			<div class="form-actions">
 				<button type="submit" class="btn green">${i18n("submit")}</button>
 			</div>
@@ -67,7 +67,7 @@
 </@layout.content>
 
 <@layout.footer>
-<script type="text/javascript" src="/assets/js/ota.project.add.js"></script>
+<script type="text/javascript" src="assets/js/ota.project.add.js"></script>
 <script>
 	jQuery(document).ready(function() {    
 		ProjectAdd.init();

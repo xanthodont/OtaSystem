@@ -13,12 +13,13 @@ var Navigation = (function() {
 	
 	var initData = function() {
 		var pathName = window.location.pathname;
-		var p = pathName.split('/', 3);
+		var p = pathName.split('/', 4);
+		//console.log(p);
 		dataConfig.filter(function(x, i) {
-			if (p[1] in x) {
+			if (p[2] in x) {
 				data.barMenu = i;
-				x[p[1]].filter(function(y, j) {
-					if (p[2] == y) data.subMenu = j;
+				x[p[2]].filter(function(y, j) {
+					if (p[3] == y) data.subMenu = j;
 				});
 			}
 		});

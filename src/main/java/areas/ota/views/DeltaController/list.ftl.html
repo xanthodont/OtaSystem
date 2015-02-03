@@ -1,7 +1,7 @@
 <#import "/views/layout/baseLayout.ftl.html" as layout>
 <@layout.header '${i18n("ota.delta")}'>  
-   <link href="/assets/media/css/jquery.fancybox.css" rel="stylesheet" />
-	<link href="/assets/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+   <link href="assets/media/css/jquery.fancybox.css" rel="stylesheet" />
+	<link href="assets/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
    
 </@layout.header>
 
@@ -31,7 +31,7 @@
 				<tr>
 					<th style="width:8px;">#</th>
 					<th>${i18n("delta.fromVersion.versionName")}</th>
-					<th></th>
+					<th>${i18n("delta.upgrade.director")}</th>
 					<th class="hidden-480">${i18n("delta.toVersion.versionName")}</th>
 					<th class="hidden-480">${i18n("delta.updateTime")}</th>
 					<th class="hidden-480">${i18n("delta.size")}</th>
@@ -122,7 +122,7 @@
 <@layout.footer>
 
 
-<script src="/assets/js/ota.delta.list.js" type="text/javascript"></script> -->  
+<script src="assets/js/ota.delta.list.js" type="text/javascript"></script> -->  
 <script>
 	jQuery(document).ready(function() {    
 		DeltaList.init();	

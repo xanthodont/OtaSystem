@@ -1,13 +1,13 @@
 <#import "../layout/loginLayout.ftl.html" as layout> 
 <@layout.myLayout>    
 <div class="logo">
-	<img src="/assets/image/logo.png" alt="" /> 
+	<img src="assets/image/logo.png" alt="" /> 
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
-	<!-- BEGIN LOGIN FORM -->
-	<form class="form-vertical login-form" action="/user/account/login" method="post">
+	<!-- BEGIN LOGIN FORM --> 
+	<form class="form-vertical login-form" action="user/account/login" method="post">
 		<h3 class="form-title">${i18n("login.title")}</h3>
 		<div class="alert alert-error hide">
 			<button class="close" data-dismiss="alert"></button>

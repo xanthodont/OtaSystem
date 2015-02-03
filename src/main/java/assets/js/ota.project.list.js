@@ -7,7 +7,7 @@ var ProjectList = (function(){
 			$('.delete').click(function(){
 				if (confirm(lang.sys.sure_delete)) {
 					$.ajax({
-						url: '/ota/project/delete',
+						url: 'ota/project/delete',
 						type: 'POST',
 						data: {id: $(this).attr('key')},
 						dataType: 'JSON',

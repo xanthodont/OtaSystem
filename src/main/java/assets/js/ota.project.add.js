@@ -19,7 +19,7 @@ var ProjectAdd = function () {
 		}
 		function ajaxResults(propertyName, results) {
 			$.ajax({
-				url: '/ota/project/getProperty',
+				url: 'ota/project/getProperty',
 				type: 'GET',
 				data: {propertyName: propertyName},
 				dataType: 'JSON',
@@ -107,7 +107,7 @@ var ProjectAdd = function () {
                  var language = $(form).find('input[name="language"]').val();
                  var operator = $(form).find('input[name="operator"]').val();
                  $.ajax({
-                 	url: '/ota/project/save',
+                 	url: 'ota/project/save',
                  	type: 'POST',
                  	data: {projectName: projectName, oem: oem, product: product, language: language, operator: operator},
                  	dataType: 'JSON',

@@ -59,7 +59,7 @@ var DeltaList = (function(){
 			
 			$('.upload,.reupload').click(function(){
 				var deltaId = $(this).attr('key');
-				form.attr('action', '/ota/delta/uploadfile/'+deltaId);
+				form.attr('action', 'ota/delta/uploadfile/'+deltaId);
 				form.find('input[name="deltaId"]').val(deltaId);
 				dialog.dialog("open");
 			});
@@ -67,7 +67,7 @@ var DeltaList = (function(){
 			$('.pass').click(function(){
 				if (confirm(lang.delta.sure_pass)) {
 					$.ajax({
-						url: '/ota/delta/setStatus',
+						url: 'ota/delta/setStatus',
 						type: 'POST',
 						data: {id: $(this).attr('key'), status: 4},
 						dataType: 'JSON',
@@ -86,7 +86,7 @@ var DeltaList = (function(){
 			$('.nopass').click(function(){
 				if (confirm(lang.delta.sure_publish)) {
 					$.ajax({
-						url: '/ota/delta/setStatus',
+						url: 'ota/delta/setStatus',
 						type: 'POST',
 						data: {id: $(this).attr('key'), status: 1},
 						dataType: 'JSON',
@@ -105,7 +105,7 @@ var DeltaList = (function(){
 			$('.publish').click(function(){
 				if (confirm(lang.delta.sure_publish)) {
 					$.ajax({
-						url: '/ota/delta/setStatus',
+						url: 'ota/delta/setStatus',
 						type: 'POST',
 						data: {id: $(this).attr('key'), status: 5},
 						dataType: 'JSON',
@@ -124,7 +124,7 @@ var DeltaList = (function(){
 			$('.retest').click(function(){
 				if (confirm(lang.delta.sure_retest)) {
 					$.ajax({
-						url: '/ota/delta/setStatus',
+						url: 'ota/delta/setStatus',
 						type: 'POST',
 						data: {id: $(this).attr('key'), status: 2},
 						dataType: 'JSON',

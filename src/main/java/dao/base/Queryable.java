@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -98,7 +99,9 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	
 	private Query getQuery() {
 		System.out.println(toSqlString());
+		session.clear();	// 清除一级缓存
 		Query query = session.createQuery(toSqlString());
+		query.setCacheMode(CacheMode.IGNORE);  // 不和二级缓存交换数据
 		if (paramValueList != null && !paramValueList.isEmpty()) {
 			for (int i = 0; i < paramValueList.size(); i++) {
 				query.setParameter(i, paramValueList.get(i));

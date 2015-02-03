@@ -12,6 +12,7 @@ import models.JResponse;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.Router;
 import ninja.i18n.Lang;
 import ninja.i18n.Messages;
 import ninja.params.Param;
@@ -42,6 +43,7 @@ public class AccountController extends BaseController {
 	@Inject
 	private IDatabase<Role> roleDao;
 	
+	
 	@Inject
 	public AccountController(Messages msg) {
 		super(msg);
@@ -53,10 +55,7 @@ public class AccountController extends BaseController {
 	
 	
 	
-	public Result logout(Session session) {
-		session.remove(AuthorizationFilter.USERNAME);
-		return Results.redirect("/login");
-	}
+	
 	
 	@FilterWith(AuthorizationFilter.class)
 	public Result list(FlashScope flashScope) {
@@ -77,7 +76,7 @@ public class AccountController extends BaseController {
 			account.setRegisterTime(System.currentTimeMillis());
 			account.setRole(roleDao.first(c -> c.equals("id", roleId)));
 			accountDao.insert(account).commit();
-			return Results.json().render(JResponse.success("/user/account/list"));
+			return Results.json().render(JResponse.success("user/account/list"));
 		} else {
 			return Results.json().render(JResponse.fail(msg.get("account.usernameNotUnique", language).get()));
 		}
@@ -93,7 +92,8 @@ public class AccountController extends BaseController {
 		AuthorizationFilter.class,
 		PrivilegeFilter.class})
 	public Result add() {
-		return Results.redirect("/user/account/edit"); 
+		List<Role> roles = roleDao.all().toList(); 
+		return Results.html().render("roles", roles);
 	}
 	
 	public Result delete(@Param(value="id") String id) {

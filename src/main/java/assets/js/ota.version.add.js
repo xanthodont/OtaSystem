@@ -18,7 +18,7 @@ var VersionAdd = function () {
 		}
 		function ajaxResults(propertyName, results) {
 			$.ajax({
-				url: '/ota/project/list',
+				url: 'ota/project/list',
 				type: 'GET',
 				data: {},
 				dataType: 'JSON',
@@ -101,7 +101,7 @@ var VersionAdd = function () {
             	var androidVersion = $(form).find('input[name="androidVersion"]').val();
             	var description = $(form).find('textarea[name="description"]').val();
             	$.ajax({
-		         	url: '/ota/version/save',
+		         	url: 'ota/version/save',
 		         	type: 'POST',
 		         	data: {
 		         		projectId: projectId, 

@@ -101,7 +101,7 @@ var AccountEdit = (function(){
                     var email = $(form).find('input[name="email"]').val();
                     var roleId = $(form).find('input[name="roleId"]').val();
                     $.ajax({
-                    	url: '/user/account/save',
+                    	url: 'user/account/save',
                     	type: 'POST',
                     	data: {username: name, password: pswd, email: email, roleId: roleId},
                     	dataType: 'JSON',

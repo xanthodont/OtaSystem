@@ -24,6 +24,7 @@ import ninja.BasicAuthFilter;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
+import ninja.Router;
 import ninja.SecureFilter;
 import ninja.i18n.Messages;
 import ninja.params.Param;
@@ -47,6 +48,8 @@ public class ApplicationController {
 	private Optional<Result> optResult;
 	//@Inject
 	//private IBasicDao<Account> dao;
+	@Inject
+	private Router router;
 	
 	@Inject
 	public ApplicationController(Messages msg) {
@@ -62,10 +65,15 @@ public class ApplicationController {
 			Session session) {
 		if (accountService.validateCredentials(username, password)) {
 			session.put(AuthorizationFilter.USERNAME, username);
-			return Results.json().render(JResponse.success("/admin"));
+			return Results.json().render(JResponse.success("admin"));
 		} else {
 			return Results.json().render(JResponse.fail(msg.get("login.notice.fail", language).get()));
 		}
+	} 
+	
+	public Result logout(Session session) {
+		session.remove(AuthorizationFilter.USERNAME);
+		return Results.redirect(router.getReverseRoute(ApplicationController.class, "loginPage"));
 	}
 	
 	public Result loginPage() {

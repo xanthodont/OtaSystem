@@ -65,7 +65,7 @@ public class DeltaController extends BaseController {
 			return Results.json().render(JResponse.fail("fail"));
 		} else {
 			dao.delete(entity).commit();
-			return Results.json().render(JResponse.success(""));
+			return Results.json().render(JResponse.success("ota/delta"));
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class DeltaController extends BaseController {
 		} else {
 			entity.setStatus(status);
 			dao.update(entity).commit();
-			return Results.json().render(JResponse.success(""));
+			return Results.json().render(JResponse.success("ota/delta"));
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class DeltaController extends BaseController {
                 	delta.setStatus(Delta.Status.TESTING);
                 	dao.update(delta).commit();
 
-            		return Results.json().render(JResponse.success(""));
+            		return Results.json().render(JResponse.success("ota/delta"));
             	}
 	        }
 	    }

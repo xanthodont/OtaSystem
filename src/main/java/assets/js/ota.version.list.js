@@ -7,7 +7,7 @@ var VersionList = (function(){
 			$('.delete').click(function(){
 				if (confirm(lang.sys.sure_delete)) {
 					$.ajax({
-						url: '/ota/version/delete',
+						url: 'ota/version/delete',
 						type: 'POST',
 						data: {id: $(this).attr('key')},
 						dataType: 'JSON',

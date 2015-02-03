@@ -18,7 +18,7 @@
 	<div class="portlet-body">
 		<div class="clearfix">
 			<div class="btn-group">
-				<a id="sample_editable_1_new" href="/ota/version/add" class="btn green">
+				<a id="sample_editable_1_new" href="ota/version/add" class="btn green">
 					${i18n("version.addnew")} <i class="icon-plus"></i>
 				</a>
 			</div>
@@ -28,7 +28,7 @@
 			<thead>
 				<tr>
 					<th style="width:8px;">#</th>
-					<th>${i18n("version.projectName")}</th>
+					<th>${i18n("project.projectName")}</th>
 					<th class="hidden-480">${i18n("version.buildNumber")}</th>
 					<th class="hidden-480">${i18n("version.versionName")}</th>
 					<th class="hidden-480">${i18n("version.androidVersion")}</th>
@@ -64,7 +64,7 @@
 </@layout.content>
 
 <@layout.footer>
-<script src="/assets/js/ota.version.list.js" type="text/javascript"></script> -->  
+<script src="assets/js/ota.version.list.js" type="text/javascript"></script> -->  
 <script>
 	jQuery(document).ready(function() {    
 		VersionList.init();	

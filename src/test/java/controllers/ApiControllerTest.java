@@ -13,8 +13,9 @@ public class ApiControllerTest extends NinjaDocTester{
 	private String checkversionUrl = "/api/checkversion";
 	private String downloadUrl = "/api/download";
 	
-	@Test
+	//@Test
 	public void loginTest() {
+		
 		Response response = makeRequest(Request.POST().url(testServerUrl().path(loginUrl))
 				.addFormParameter("imei", imei)
 				.addFormParameter("sn", sn)

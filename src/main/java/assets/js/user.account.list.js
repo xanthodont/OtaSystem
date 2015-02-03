@@ -7,7 +7,7 @@ var AccountList = (function(){
 			$('.delete').click(function(){
 				if (confirm(lang.sys.sure_delete)) {
 					$.ajax({
-						url: '/user/account/delete',
+						url: 'user/account/delete',
 						type: 'POST',
 						data: {id: $(this).attr('key')},
 						dataType: 'JSON',

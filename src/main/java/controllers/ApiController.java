@@ -7,7 +7,11 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import utils.MD5;
+import utils.StringUtil;
 import areas.ota.models.Delta;
 import areas.ota.models.Project;
 import areas.ota.models.Version;
@@ -33,7 +37,8 @@ public class ApiController extends BaseController {
 	private IDatabase<Version> versionDao;
 	@Inject
 	private IDatabase<Delta> deltaDao;
-	
+
+	private Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
 	@Inject
 	public ApiController(Messages msg) {
@@ -48,12 +53,19 @@ public class ApiController extends BaseController {
 			@Param(value="operator") String operator,
 			Session session
 			) {
+		logger.debug(String.format("Param --- imei:%s, sn:%s, sim:%s, operator:%s", imei, sn, sim, operator));
+		boolean istestDevice = false;
 		ResourceBundle bundle = ResourceBundle.getBundle("config");
 		String otaSN = bundle.getString("sn");
+		String mode = bundle.getString("mode");
 		/** 验证SN */
 		if (sn.equals(otaSN)) {
-			// 判断是否是测试IMEI号
-			boolean istestDevice = true;
+			// 测试模式
+			if (StringUtil.isEmpty(mode) && mode.equals("debug")) {
+				istestDevice = true;
+			} else { // 判断是否是测试IMEI号
+				istestDevice = true;
+			}
 			
 			/** 设置Session值 */
 			int rand = new Random().nextInt();
@@ -78,7 +90,12 @@ public class ApiController extends BaseController {
 			@Param(value="version") String projectVersion, 
 			@Param(value="token") String token,
 			Session session) {
-		if (token.equals(session.get(OtaConstants.SESSION_TOKEN))) {
+		
+		boolean istestDevice = Boolean.parseBoolean(session.get(OtaConstants.SESSION_ISTEST_DEVICE));
+		//istestDevice = true;
+		logger.debug(String.format("Param --- version:%s, token:%s, istest:%b", projectVersion, token, istestDevice));
+		//logger.debug(String.format("Session --- "));
+		if (istestDevice || token.equals(session.get(OtaConstants.SESSION_TOKEN))) {
 			String[] projects = projectVersion.split("_");
 			if (projects.length < 4) {
 				return Results.json().render(new OtaResponse(OtaConstants.param_lost_code, OtaConstants.param_lost_info));
@@ -88,7 +105,7 @@ public class ApiController extends BaseController {
 			String language = projects[2];
 			String buildNumber = projects[3];
 			//String operator = projects[4];
-			boolean istestDevice = Boolean.parseBoolean(session.get(OtaConstants.SESSION_ISTEST_DEVICE));
+			//boolean istestDevice = Boolean.parseBoolean(session.get(OtaConstants.SESSION_ISTEST_DEVICE));
 			/** 检测项目是否存在 */
 			Project project = (Project) projectDao.first()
 					.and(c -> c.equals("oem", oem))
@@ -99,9 +116,13 @@ public class ApiController extends BaseController {
 				return Results.json().render(new OtaResponse(OtaConstants.version_invalid_code, OtaConstants.version_invalid_info));
 			}
 			/** 检测该项目的版本号是否存在 */
-			List<Version> versionList = project.getVersions().stream()
-					.filter(p -> buildNumber.equals(p.getBuildNumber()))
-					.collect(Collectors.toList());
+			List<Version> versionList = versionDao.all()
+					.where(c -> c.equals("projectId", project.getId()))
+					.and(c -> c.equals("buildNumber", buildNumber))
+					.toList();
+					//.stream()
+					//.filter(p -> buildNumber.equals(p.getBuildNumber()))
+					//.collect(Collectors.toList());
 			if (versionList.size() != 1) { // 必须是有且仅有一个
 				return Results.json().render(new OtaResponse(OtaConstants.version_invalid_code, OtaConstants.version_invalid_info));
 			}
@@ -149,7 +170,7 @@ public class ApiController extends BaseController {
 			@Param(value="version") String buildNumber,
 			Context context,
 			Session session) {
-			
+		logger.debug(String.format("Param --- token:%s, deltaId:%d, range:%d, buildNumber:%s", token, deltaId, range, buildNumber));
 		return Results.ok();
 	}
 }

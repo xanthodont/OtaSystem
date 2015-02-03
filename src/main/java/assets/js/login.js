@@ -50,7 +50,7 @@ var Login = function () {
 	            	var name = $(form).find('input[name="username"]').val();
                     var pswd = $(form).find('input[name="password"]').val();
                     $.ajax({
-                    	url: '/user/account/login',
+                    	url: 'user/account/login',
                         type: 'POST',
                         data: {username: name, password: pswd},
                         dataType: 'json',

@@ -50,6 +50,11 @@ public class VersionController extends BaseController {
 	
 	
 	public Result save(Version version, @Param(value="projectId") long projectId) {
+		/**
+		 * 处理字符
+		 */
+		version.setBuildNumber(version.getBuildNumber().replace("_", "$"));
+		
 		long count = dao.count()
 				.and(c -> c.equals("buildNumber", version.getBuildNumber()))
 				.toCount();
@@ -72,7 +77,7 @@ public class VersionController extends BaseController {
 				delta.setUpdateTime(System.currentTimeMillis());
 				deltaDao.insert(delta).commit();
 			}
-			return Results.json().render(JResponse.success("/ota/version"));
+			return Results.json().render(JResponse.success("ota/version"));
 		} 
 	} 
 	
@@ -82,7 +87,7 @@ public class VersionController extends BaseController {
 			return Results.json().render(JResponse.fail("fail"));
 		} else {
 			dao.delete(entity).commit();
-			return Results.json().render(JResponse.success(""));
+			return Results.json().render(JResponse.success("ota/version/list"));
 		}
 	}
 	
