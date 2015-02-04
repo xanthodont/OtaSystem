@@ -18,9 +18,13 @@ package controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import service.IAccountService;
 import models.JResponse;
 import ninja.BasicAuthFilter;
+import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
@@ -50,6 +54,7 @@ public class ApplicationController {
 	//private IBasicDao<Account> dao;
 	@Inject
 	private Router router;
+	private Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 	
 	@Inject
 	public ApplicationController(Messages msg) {
@@ -63,6 +68,7 @@ public class ApplicationController {
 			@Param("username") String username, 
 			@Param("password") String password,
 			Session session) {
+		logger.debug(String.format("SessionId --- %s", session.getId()));
 		if (accountService.validateCredentials(username, password)) {
 			session.put(AuthorizationFilter.USERNAME, username);
 			return Results.json().render(JResponse.success("admin"));
@@ -85,7 +91,10 @@ public class ApplicationController {
     }
     
     @FilterWith({AuthorizationFilter.class})
-    public Result admin() {
+    public Result admin(Context context, Session session) {
+    	//logger.debug(String.format("Param --- version:%s, token:%s, istest:%b", projectVersion, token, istestDevice));
+    	logger.debug(String.format("SessionId --- %s", session.getId()));
+		logger.debug(String.format("Cookie: %s", context.getCookie("NINJA_SESSION").getValue()));
     	return Results.html();
     }
     

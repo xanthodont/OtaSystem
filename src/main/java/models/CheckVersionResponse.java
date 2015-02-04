@@ -6,8 +6,8 @@ public class CheckVersionResponse {
 	public long size;
 	public String android_version;
 	public String release_notes;
-	public long deltaId;
-	public String fingerprint;
+	public long versionId;
+	//public String fingerprint;
 	public String getStatus() {
 		return status;
 	}
@@ -38,6 +38,14 @@ public class CheckVersionResponse {
 	public void setRelease_notes(String release_notes) {
 		this.release_notes = release_notes;
 	}
+	public long getVersionId() {
+		return versionId;
+	}
+	public void setVersionId(long versionId) {
+		this.versionId = versionId;
+	}
+	
+	/*
 	public long getDeltaId() {
 		return deltaId;
 	}
@@ -50,6 +58,6 @@ public class CheckVersionResponse {
 	public void setFingerprint(String fingerprint) {
 		this.fingerprint = fingerprint;
 	}
-	
+	*/
 	
 }
