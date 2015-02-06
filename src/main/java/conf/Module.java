@@ -24,6 +24,7 @@ import service.IAccountService;
 import ninja.UsernamePasswordValidator;
 import areas.ota.models.Delta;
 import areas.ota.models.Project;
+import areas.ota.models.TestImei;
 import areas.ota.models.Version;
 import areas.user.models.Account;
 import areas.user.models.Profile;
@@ -40,6 +41,7 @@ import dao.IBasicDao;
 import dao.ProfileDao;
 import dao.ProjectDao;
 import dao.RoleDao;
+import dao.TestImeiDao;
 import dao.VersionDao;
 import dao.base.IDatabase;
 
@@ -63,10 +65,10 @@ public class Module extends AbstractModule {
 		// TODO Auto-generated method stub
 		//bind(TypeLiteral.class).toInstance(arg0);
 		bind(new TypeLiteral<IDatabase<Account>>() {})
-			.to(new TypeLiteral<AccountDao>(){});
+		.to(new TypeLiteral<AccountDao>(){});
 	
 		bind(new TypeLiteral<IDatabase<Profile>>() {})
-			.to(new TypeLiteral<ProfileDao>(){});
+		.to(new TypeLiteral<ProfileDao>(){});
 	 
 		bind(new TypeLiteral<IDatabase<Role>>() {})
 		.to(new TypeLiteral<RoleDao>(){});
@@ -79,6 +81,9 @@ public class Module extends AbstractModule {
 		
 		bind(new TypeLiteral<IDatabase<Delta>>() {})
 		.to(new TypeLiteral<DeltaDao>(){});
+		
+		bind(new TypeLiteral<IDatabase<TestImei>>() {})
+		.to(new TypeLiteral<TestImeiDao>(){});
 	}
 	
 	private void configServices() {

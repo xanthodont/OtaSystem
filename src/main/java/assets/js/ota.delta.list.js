@@ -84,7 +84,7 @@ var DeltaList = (function(){
 			});
 			
 			$('.nopass').click(function(){
-				if (confirm(lang.delta.sure_publish)) {
+				if (confirm(lang.delta.sure_nopass)) {
 					$.ajax({
 						url: 'ota/delta/setStatus',
 						type: 'POST',

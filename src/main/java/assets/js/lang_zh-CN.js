@@ -18,6 +18,7 @@ var lang = {
 	}, 
 	delta: {
 		sure_pass: '确认通过测试？',
+		sure_nopass: '确认不通过？',
 		sure_publish: '确认发布？',
 		sure_retest: '确认重新测试？',
 		sure_undo: '确认撤销发布？'

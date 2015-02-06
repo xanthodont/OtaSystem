@@ -2,11 +2,16 @@ package controllers;
 
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,9 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import utils.MD5;
+import utils.ProjectUtil;
 import utils.StringUtil;
 import areas.ota.models.Delta;
 import areas.ota.models.Project;
+import areas.ota.models.TestImei;
 import areas.ota.models.Version;
 
 import com.google.inject.Inject;
@@ -42,6 +49,8 @@ public class ApiController extends BaseController {
 	private IDatabase<Version> versionDao;
 	@Inject
 	private IDatabase<Delta> deltaDao;
+	@Inject
+	private IDatabase<TestImei> testImeiDao;
 
 	private Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
@@ -63,7 +72,6 @@ public class ApiController extends BaseController {
 			@Param(value="operator") String operator
 			) {
 		HttpSession session = httpServletRequest.getSession();
-		//logger.debug(String.format("Cookie: %s", context.getCookie("NINJA_SESSION").getValue()));
 		logger.debug(String.format("SessionId --- %s", session.getId()));
 		logger.debug(String.format("Param --- imei:%s, sn:%s, sim:%s, operator:%s", imei, sn, sim, operator));
 		boolean istestDevice = false;
@@ -76,7 +84,9 @@ public class ApiController extends BaseController {
 			if (!StringUtil.isEmpty(mode) && mode.equals("debug")) {
 				istestDevice = true;
 			} else { // 判断是否是测试IMEI号
-				istestDevice = true;
+				long count = testImeiDao.count(c -> c.equals("imei", imei));
+				if (count == 1) 
+					istestDevice = true;
 			}
 			
 			/** 设置Session值 */
@@ -133,9 +143,6 @@ public class ApiController extends BaseController {
 					.where(c -> c.equals("projectId", project.getId()))
 					.and(c -> c.equals("buildNumber", buildNumber))
 					.toList();
-					//.stream()
-					//.filter(p -> buildNumber.equals(p.getBuildNumber()))
-					//.collect(Collectors.toList());
 			if (versionList.size() != 1) { // 必须是有且仅有一个
 				return Results.json().render(new OtaResponse(OtaConstants.version_invalid_code, OtaConstants.version_invalid_info));
 			}
@@ -143,14 +150,13 @@ public class ApiController extends BaseController {
 			
 			/** 查找客户当前版本可以升级的拆分包 */
 			Delta delta = null;
-			if (istestDevice) { // 测试情况
+			if (istestDevice) { // 测试模式
 				delta = (Delta) deltaDao.first()
 						.and(c -> c.equals("fromVersionId", clientVersion.getId()))
 						.and(c -> c.equals("status", 2))
 						.orderBy(false, "toVersionId")
 						.toEntity();
-				
-			} else { // 实际情况
+			} else { // 生产模式
 				delta = (Delta) deltaDao.first()
 						.and(c -> c.equals("fromVersionId", clientVersion.getId()))
 						.and(c -> c.equals("status", 5)) 
@@ -188,7 +194,50 @@ public class ApiController extends BaseController {
 		boolean istestDevice = (boolean) (session.getAttribute(OtaConstants.SESSION_ISTEST_DEVICE));
 		if (istestDevice || token.equals(session.getAttribute(OtaConstants.SESSION_TOKEN))) {
 			Delta delta = deltaDao.first(c -> c.equals("id", deltaId));
+			if (delta == null) {
+				return Results.notFound();
+			}
+			String basePath = ProjectUtil.getDeltaSavePath() + String.valueOf(delta.getId());
+			File outputFile = new File(basePath+File.separator+delta.getFilePath());
+			if (!outputFile.exists()) {
+				return Results.notFound();
+			}
 			
+			RandomAccessFile in;
+			try {
+				in = new RandomAccessFile(outputFile, "r");
+				long fileSize = outputFile.length();
+				int blockSize = 1024;
+				if (range > 0 && range < fileSize) {
+					in.seek(range);
+					httpServletResponse.setHeader("Content-Length", String.valueOf(fileSize-range));
+					httpServletResponse.setHeader("Accept-Ranges", String.format("bytes%d-%d/$d", range, fileSize-1, fileSize));
+				} else {
+					httpServletResponse.setHeader("Content-Length", String.valueOf(fileSize));
+					httpServletResponse.setHeader("Accept-Ranges", "bytes");
+				}
+				httpServletResponse.setHeader("Cache-Control", "public");
+				httpServletResponse.setHeader("Pragma", "public");
+				httpServletResponse.setHeader("Content-Disposition", "inline; filename="+outputFile.getName());
+				
+				byte[] bytes = new byte[1024];
+				int length = 0;
+				ServletOutputStream out = httpServletResponse.getOutputStream();
+				while ((length = in.read(bytes)) != -1) {
+					out.write(bytes);
+				}
+				out.flush();
+				out.close();
+				in.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				logger.info(e.getMessage());
+				return Results.notFound();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				logger.info(e.getMessage());
+				return Results.status(500);
+			}
 			return Results.ok();
 		} else {
 			return Results.json().render(new OtaResponse(OtaConstants.token_invalid_code, OtaConstants.token_invalid_info));
