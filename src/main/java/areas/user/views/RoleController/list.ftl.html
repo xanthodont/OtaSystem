@@ -36,26 +36,20 @@
 			<thead>
 				<tr>
 					<th style="width:8px;">#</th>
-					<th>${i18n("account.username")}</th>
-					<th class="hidden-480">${i18n("account.email")}</th>
-					<th class="hidden-480">${i18n("account.registerTime")}</th>
+					<th>${i18n("role.roleName")}</th>
+					<th class="hidden-480">${i18n("role.privilege")}</th>
 					<th></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<#assign i = 1>
-				<#list accounts as act>
+				<#list roles as entity>
 				<tr class="odd gradeX">
 					<td>${i} <#assign i = i+1></td>
-					<td>${act.username}</td>
-					<td class="hidden-480">
-						<a href="javascript:;">
-						<#if act.email??>${act.email}
-						<#else>${i18n("notSetting")}</#if></a>
-					</td>
-					<td class="hidden-480 format" >${act.registerTime}</td>
-					<td ><span class="label label-success">${act.role.roleName}</span></td>
+					<td>${entity.roleName}</td>
+					<td class="hidden-480 format" >${entity.privilege}</td>
+					<td ><span class="label label-success"></span></td>
 					<td>
 						<a href="#" class="btn mini purple"><i class="icon-edit"></i> Edit</a>
 						<a href="#" class="btn mini black"><i class="icon-trash"></i> Delete</a>

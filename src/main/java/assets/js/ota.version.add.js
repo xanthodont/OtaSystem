@@ -18,14 +18,14 @@ var VersionAdd = function () {
 		}
 		function ajaxResults(propertyName, results) {
 			$.ajax({
-				url: 'ota/project/list',
+				url: 'ota/project/getList',
 				type: 'GET',
 				data: {},
 				dataType: 'JSON',
 				success: function(resp) {
-					//console.log(resp);
-					for (var i = 0, len = resp.projects.length; i < len; i++) {
-						results.push({id: resp.projects[i].id, text: resp.projects[i].projectName});
+					var list = resp.projects;
+					for (var i = 0, len = list.length; i < len; i++) {
+						results.push({id: list[i].id, text: list[i].projectName});
 					}
 				}
 			});

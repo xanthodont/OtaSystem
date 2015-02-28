@@ -38,6 +38,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	public IQueryable<TEntity> all() {
 		// TODO Auto-generated method stub
 		session = sessionFactory.openSession(); 
+		session.clear();
 		IQueryable<TEntity> query = new Queryable<TEntity>(session, persistentClass, OperateType.all);
 		
 		return query;
@@ -91,6 +92,7 @@ public class Database<TEntity> implements IDatabase<TEntity> {
 	public void commit() {
 		// TODO Auto-generated method stub
 		session.getTransaction().commit();
+		session.flush();
 		session.close();
 	}
 

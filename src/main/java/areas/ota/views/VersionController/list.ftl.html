@@ -40,7 +40,7 @@
 			</thead>
 			<tbody>
 				<#assign i = 1>
-				<#list versions as v>
+				<#list versions.list as v>
 				<tr class="odd gradeX">
 					<td>${i} <#assign i = i+1></td>
 					<td>${v.project.projectName}</td>
@@ -58,6 +58,7 @@
 				</#list>
 			</tbody>
 		</table>
+		<@layout.pager versions.pager></@layout.pager>  
 	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->

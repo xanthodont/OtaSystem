@@ -22,6 +22,7 @@ import org.hibernate.cfg.Configuration;
 import service.AccountServiceImpl;
 import service.IAccountService;
 import ninja.UsernamePasswordValidator;
+import ninja.template.TemplateEngineFreemarker;
 import areas.ota.models.Delta;
 import areas.ota.models.Project;
 import areas.ota.models.TestImei;
@@ -50,11 +51,17 @@ public class Module extends AbstractModule {
     
 
     protected void configure() {
+    	configFreemaker();
     	configDatabases();
     	configDaos();
     	configServices();
     	bindFilters();
     }
+
+	private void configFreemaker() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	private void configDatabases() {
 		// TODO Auto-generated method stub

@@ -16,6 +16,7 @@ var ProjectAdd = function () {
 	                query.callback(data);
 	            }
 	        });
+			
 		}
 		function ajaxResults(propertyName, results) {
 			$.ajax({
@@ -27,6 +28,7 @@ var ProjectAdd = function () {
 					for (var i = 0, len = resp.length; i < len; i++) {
 						results.push({id: resp[i], text: resp[i]});
 					}
+					
 				}
 			});
 		}
@@ -40,10 +42,11 @@ var ProjectAdd = function () {
 		queryFilter('#select2_product', productResults);
 		queryFilter('#select2_language', languageResults);
 		queryFilter('#select2_operator', operatorResults);
-    }
+	}
+
 	
 	function formInit() {
-		var form = $('#form_add');
+		var form = $('#form_model');
 		var error = $('.alert-error', form);
         var success = $('.alert-success', form);
         
@@ -83,12 +86,10 @@ var ProjectAdd = function () {
             },
             success: function (label) {
                 if (label.attr("for") == "service" || label.attr("for") == "roleId") { // for checkboxes and radip buttons, no need to show OK icon
-                    label
-                        .closest('.control-group').removeClass('error').addClass('success');
+                    label.closest('.control-group').removeClass('error').addClass('success');
                     label.remove(); // remove error label here
                 } else { // display success icon for other inputs
-                    label
-                        .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
+                    label.addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
                     .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
                 }
             },

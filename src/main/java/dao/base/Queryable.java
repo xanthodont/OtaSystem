@@ -19,7 +19,9 @@ import org.slf4j.Logger;
 import com.google.inject.Inject;
 
 import dao.SqlProperty;
-import dao.extensions.IPageList;
+import models.IPageList;
+import models.PageList;
+import models.Pager;
 
 public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity> {
 	/**
@@ -60,7 +62,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return this;
 	}
 	
-	public Queryable where(ICondition and) {
+	public Queryable<TEntity> where(ICondition and) {
 		//sql.append(" WHERE ").append("");//predicate.
 		if (and != null) {
 			SqlProperty sp = new SqlProperty();
@@ -70,7 +72,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return this;
 	}
 	
-	public Queryable and(ICondition and) {
+	public Queryable<TEntity> and(ICondition and) {
 		//sql.append(" WHERE ").append("");//predicate.
 		if (and != null) {
 			SqlProperty sp = new SqlProperty();
@@ -79,7 +81,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		}
 		return this;
 	}
-	public Queryable or(ICondition or) {
+	public Queryable<TEntity> or(ICondition or) {
 		//sql.append(" WHERE ").append("");//predicate.
 		SqlProperty sp = new SqlProperty();
 		or.condition(sp);
@@ -87,25 +89,28 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return this;
 	}
 	
-	public Queryable limit(int page, int size) {
+	public Queryable<TEntity> limit(int page, int size) {
 		limitCondition = new LimitCondition(page, size);
 		return this;
 	}
 	
-	public Queryable orderBy(boolean order, String... properties) {
+	public Queryable<TEntity> orderBy(boolean order, String... properties) {
 		this.orderByCondition = new OrderByCondition(order, properties);
 		return this;
 	}
 	
 	private Query getQuery() {
-		System.out.println(toSqlString());
-		session.clear();	// 清除一级缓存
+		//System.out.println(toSqlString());
 		Query query = session.createQuery(toSqlString());
 		query.setCacheMode(CacheMode.IGNORE);  // 不和二级缓存交换数据
 		if (paramValueList != null && !paramValueList.isEmpty()) {
 			for (int i = 0; i < paramValueList.size(); i++) {
 				query.setParameter(i, paramValueList.get(i));
 			}
+		}
+		if (limitCondition != null) {
+			query.setFirstResult((limitCondition.getPage()-1)*limitCondition.getSize());
+			query.setMaxResults(limitCondition.getSize());
 		}
 		return query;
 	}
@@ -117,9 +122,12 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	}
 	
 	public long toCount() {
+		return toCount(true);
+	}
+	public long toCount(boolean isClosed) {
 		List<TEntity> list = getQuery().list();
 		long count = (long) list.get(0);
-		session.close();
+		if (isClosed) session.close();
 		return count;
 	}
 
@@ -134,9 +142,30 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	
 
 	@Override
-	public IPageList<TEntity> toPageList() {
+	public PageList<TEntity> toPageList(String actionLink, int pageIndex, int pageSize) {
 		// TODO Auto-generated method stub
-		return null;
+		if (pageIndex < 1) pageIndex = 1;
+		if (pageSize < 1) pageSize = 10;
+		OperateType oldType = this.opType;
+		this.opType = OperateType.count;
+		long count = this.toCount(false);
+		this.opType = oldType; 
+		this.limit(pageIndex, pageSize);
+		List<TEntity> list = this.toList();
+		PageList<TEntity> pageList = new PageList<TEntity>(list, new Pager(pageIndex, pageSize));
+		long totalPage = (count-1)/pageSize + 1;
+		totalPage = totalPage < 1 ? 1 : totalPage;
+		pageList.getPager().setTotalPage(totalPage);
+		int prev = (pageIndex - 1) > 0 ? (pageIndex - 1) : 1;
+		int next = (pageIndex + 1) <= pageList.getPager().getTotalPage() ? (pageIndex + 1) : (int)totalPage; 
+		pageList.getPager().setPrev(prev);
+		pageList.getPager().setNext(next);
+		pageList.getPager().setActionLink(actionLink);
+		return pageList; 
+	}
+	@Override
+	public PageList<TEntity> toPageList(int pageIndex) {
+		return toPageList("link", pageIndex, 10);
 	}
 
 	@Override
@@ -195,12 +224,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 				   .append(orderByCondition.getProperties())
 				   .append(orderByCondition.getOrder() ? " ASC " : " DESC ");
 		}
-		if (limitCondition != null) {
-			builder.append(" LIMIT ")
-				   .append((limitCondition.getPage()-1)*limitCondition.getSize())
-				   .append(",")
-				   .append(limitCondition.getSize());
-		}
+		
 		
 		return builder.toString();
 	}

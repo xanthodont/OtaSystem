@@ -1,5 +1,9 @@
 package areas.ota.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.swing.text.DateFormatter;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
@@ -45,6 +51,8 @@ public class Project {
 	
 	@Column(name="updateTime")
 	private long updateTime;
+	@Transient
+	private String updateTimeStr;
 	
 	@Column(name="description")
 	private String description;
@@ -53,6 +61,13 @@ public class Project {
 	@JoinColumn(name="projectId", referencedColumnName="id")
 	@JsonIgnore
 	private Set<Version> versions; 
+	
+	/**
+	 * 默认取值
+	 */
+	public Project() {
+		projectName = oem = language = product = operator = description = "";
+	}
 
 	public long getId() {
 		return id;
@@ -125,6 +140,14 @@ public class Project {
 	public void setVersions(Set<Version> versions) {
 		this.versions = versions;
 	}
-	
-	
+
+	public String getUpdateTimeStr() {
+		Date d = new Date(this.updateTime);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return df.format(d);
+	}
+
+	public void setUpdateTimeStr(String updateTimeStr) {
+		this.updateTimeStr = updateTimeStr;
+	}
 }

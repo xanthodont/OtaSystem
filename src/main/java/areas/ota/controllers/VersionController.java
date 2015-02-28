@@ -12,11 +12,13 @@ import controllers.BaseController;
 import dao.base.IDatabase;
 import filters.AuthorizationFilter;
 import models.JResponse;
+import models.PageList;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import ninja.params.Param;
+import ninja.params.PathParam;
 
 @FilterWith(AuthorizationFilter.class)
 public class VersionController extends BaseController {
@@ -37,8 +39,8 @@ public class VersionController extends BaseController {
 		return Results.html();
 	}
 	
-	public Result list() {
-		List<Version> versions = dao.all().toList();
+	public Result list(@Param("page") int page) {
+		PageList<Version> versions = dao.all().toPageList(page);
 		
 		return Results.html().render("versions", versions);
 	}

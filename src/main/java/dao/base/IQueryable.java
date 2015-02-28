@@ -2,7 +2,8 @@ package dao.base;
 
 import java.util.List;
 
-import dao.extensions.IPageList;
+import models.IPageList;
+import models.PageList;
 
 public interface IQueryable<TEntity> extends List {
 	IQueryable where(ICondition w);
@@ -10,15 +11,17 @@ public interface IQueryable<TEntity> extends List {
 	String toSqlString();
 	
 	long toCount();
+	long toCount(boolean isClosed);
 	int exec();
 	
-	IQueryable and(ICondition and);
-	IQueryable or(ICondition or);
-	IQueryable orderBy(boolean order, String... properties);
+	IQueryable<TEntity> and(ICondition and);
+	IQueryable<TEntity> or(ICondition or);
+	IQueryable<TEntity> orderBy(boolean order, String... properties);
 	
 	List<TEntity> toList();
 	
 	TEntity toEntity();
 	
-	IPageList<TEntity> toPageList(); 
+	PageList<TEntity> toPageList(String actionLink, int pageIndex, int pageSize); 
+	PageList<TEntity> toPageList(int pageIndex); 
 }

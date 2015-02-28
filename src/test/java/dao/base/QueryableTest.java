@@ -15,8 +15,12 @@ public class QueryableTest {
 	
 	@Test
 	public void countTest(){
-		//query = new Queryable<String>(null, String.class, OperateType.count);
-		//query.toCount();
+		// 方法1：通过Throwable的方法getStackTrace()  
+        String funcName2 = new Throwable().getStackTrace()[1].getMethodName();  
+        System.out.println(funcName2);  
+        //方法2：通过Thread的方法getStackTrace()  
+        String clazzName4 = Thread.currentThread().getStackTrace()[2].getMethodName();  
+        System.out.println(clazzName4);   
 	}
 	
 	@Test

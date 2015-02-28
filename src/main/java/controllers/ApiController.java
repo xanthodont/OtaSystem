@@ -78,6 +78,7 @@ public class ApiController extends BaseController {
 		ResourceBundle bundle = ResourceBundle.getBundle("config");
 		String otaSN = bundle.getString("sn");
 		String mode = bundle.getString("mode");
+		String serverVersion = bundle.getString("serverVersion");
 		/** 验证SN */
 		if (sn.equals(otaSN)) {
 			// 测试模式
@@ -99,7 +100,7 @@ public class ApiController extends BaseController {
 			
 			return Results.json().render(new LoginResponse(
 					OtaConstants.success_code,
-					"",
+					serverVersion,
 					String.valueOf(rand),
 					session.getId()
 					));
@@ -219,6 +220,7 @@ public class ApiController extends BaseController {
 				httpServletResponse.setHeader("Cache-Control", "public");
 				httpServletResponse.setHeader("Pragma", "public");
 				httpServletResponse.setHeader("Content-Disposition", "inline; filename="+outputFile.getName());
+				
 				
 				byte[] bytes = new byte[1024];
 				int length = 0;
