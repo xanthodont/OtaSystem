@@ -39,8 +39,7 @@ public class ProjectController extends BaseController{
 	@Inject
 	private IDatabase<Project> projectDao;
 	
-	@Inject 
-	private Router router;
+	
 	
 	public Result index() {
 		return Results.ok();
@@ -54,7 +53,7 @@ public class ProjectController extends BaseController{
 		
 		IQueryable<Project> query = projectDao.all();
 		if (projectId > 0) query = query.where(c -> c.equals("id", projectId));
-		PageList<Project> projects = query.toPageList(link, page, 5);
+		PageList<Project> projects = query.toPageList(link, page, 10);
 		return Results.ok()
 				.render("projects", projects)
 				.supportedContentTypes(

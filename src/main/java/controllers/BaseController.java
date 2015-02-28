@@ -1,6 +1,7 @@
 package controllers;
 
 import ninja.Result;
+import ninja.Router;
 import ninja.i18n.Messages;
 
 import com.google.common.base.Optional;
@@ -10,6 +11,8 @@ public class BaseController {
 	protected Messages msg;
 	protected Optional<String> language;
 	protected Optional<Result> optResult;
+	@Inject 
+	protected Router router;
 	
 	@Inject
 	public BaseController(Messages msg) {

@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 
 import controllers.BaseController;
 import dao.base.IDatabase;
+import dao.base.IQueryable;
 import filters.AuthorizationFilter;
 import models.JResponse;
 import models.PageList;
@@ -39,8 +40,15 @@ public class VersionController extends BaseController {
 		return Results.html();
 	}
 	
-	public Result list(@Param("page") int page) {
-		PageList<Version> versions = dao.all().toPageList(page);
+	public Result list(
+			@Param("page") int page,
+			@Param("projectId") long projectId) {
+		String method = new Throwable().getStackTrace()[0].getMethodName();
+		String link = router.getReverseRoute(getClass(), method);
+		
+		IQueryable<Version> query = dao.all();
+		if (projectId > 0) query.and(c -> c.equals("projectId", projectId));
+		PageList<Version> versions = query.toPageList(link, page, 10);
 		
 		return Results.html().render("versions", versions);
 	}

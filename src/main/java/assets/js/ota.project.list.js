@@ -69,30 +69,6 @@ var ProjectList = (function(){
 				buttons: {
 					'保存': function() {
 						$('#form_edit').submit();
-						/*
-						var form = $('#form_edit');
-						var id = $(form).find('input[name="id"]').val();
-						var projectName = $(form).find('input[name="projectName"]').val();
-		                var oem = $(form).find('input[name="oem"]').val();
-		                var product = $(form).find('input[name="product"]').val();
-		                var language = $(form).find('input[name="language"]').val();
-		                var operator = $(form).find('input[name="operator"]').val();
-		                $.ajax({
-		                	url: 'ota/project/save',
-		                	type: 'POST',
-		                 	data: {id: id, projectName: projectName, oem: oem, product: product, language: language, operator: operator},
-		                 	dataType: 'JSON',
-		                 	error: function() {},
-		                 	success: function(resp) {
-		                 		if (resp.code == constants.code.success) {
-		                             window.location.href = resp.msg;
-		                         } else {
-		                         	//success.hide();
-		                         	//$('.alert-error', form).children('span').html(resp.msg);
-		                         	//$('.alert-error', form).show();
-		                         }
-		                 	}
-		                });*/
 					},
 					'取消': function() {
 						$(this).dialog('close');
