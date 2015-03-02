@@ -10,8 +10,9 @@ var ProjectList = (function(){
 		            minimumInputLength: 0,
 		            query: function (query) {
 		            	var data = {
-		                    results: [{id: 0, text: '=显示全部='}]
+		                    results: []
 		                };
+		            	data.results.push({id: query.term, text: query.term});
 		            	var rs = results.filter(function(x) {return x.text.match(query.term);});
 		            	for (var i = 0, len = rs.length;  i < len; i++) {
 		            		data.results.push(rs[i]);
@@ -19,26 +20,38 @@ var ProjectList = (function(){
 		                query.callback(data);
 		            }
 		        });
+				
 			}
-			function ajaxResults(results) {
+			function ajaxResults(propertyName, results) {
 				$.ajax({
-					url: 'ota/project/getList',
+					url: 'ota/project/getProperty',
 					type: 'GET',
-					data: {},
+					data: {propertyName: propertyName},
 					dataType: 'JSON',
 					success: function(resp) {
-						var list = resp.projects;
-						for (var i = 0, len = list.length; i < len; i++) {
-							results.push({id: list[i].id, text: list[i].projectName});
+						for (var i = 0, len = resp.length; i < len; i++) {
+							results.push({id: resp[i], text: resp[i]});
 						}
+						
 					}
 				});
 			}
-			var	projectResults = [];
-			ajaxResults(projectResults);
+			var	oemResults = [], productResults = [], languageResults = [], operatorResults = [];
+			ajaxResults('oem', oemResults);
+			ajaxResults('product', productResults);
+			ajaxResults('language', languageResults);
+			ajaxResults('operator', operatorResults);
 			
-			queryFilter('#select2_projectId', projectResults);
-			$('#select2_projectId').click(function(){
+			//queryFilter('#select2_oem', oemResults);
+			queryFilter('#select2_product', productResults);
+			queryFilter('#select2_language', languageResults);
+			//queryFilter('#select2_operator', operatorResults);
+			
+			//queryFilter('#select2_product', projectResults);
+			$('#select2_product').click(function(){
+				$('#search_form').submit();
+			});
+			$('#select2_language').click(function(){
 				$('#search_form').submit();
 			});
 			

@@ -28,9 +28,13 @@
 		<!--  -->
 		<div class="controls controls-row">
 		  <form action="ota/project/list" method="POST" id="search_form">
-			<label class="span1 control-label"><strong>${i18n("project.projectName")}</strong></label>
+			<label class="span1 control-label"><strong>${i18n("project.product")}</strong></label>
 			<div class="controls">
-				<input type="hidden" id="select2_projectId" class="span3 select2" name="projectId">
+				<input type="hidden" id="select2_product" class="span3 select2" name="product">
+			</div>
+			<label class="span1 control-label"><strong>${i18n("project.language")}</strong></label>
+			<div class="controls">
+				<input type="hidden" id="select2_language" class="span3 select2" name="language">
 			</div>
       	  </form>
 		</div>

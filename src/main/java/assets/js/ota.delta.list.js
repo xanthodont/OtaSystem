@@ -158,6 +158,36 @@ var DeltaList = (function(){
 					});
 				}
 			});
+			
+			
+			
+			$('#select2_versionId').select2({
+				placeholder: "=请输入版本名称=",
+			    minimumInputLength: 2,
+			    ajax: {
+			    	url: 'ota/version/getList',
+					type: 'GET',
+					dataType: 'JSON',
+					data: function (term, page) {
+			            return {
+			                q: term, // search term
+			            };
+			        },
+			        results: function (data, page) { // parse the results into the format expected by Select2.
+			            // since we are using custom formatting functions we do not need to alter the remote JSON data
+			        	var results = [{id: 0, text: '=显示全部='}];
+			        	var list = data.versions;
+						for (var i = 0, len = list.length; i < len; i++) {
+							results.push({id: list[i].id, text: list[i].versionName});
+						}
+			            return { results: results };
+			        },
+			        cache: true
+			    }
+			});
+			$('#select2_versionId').click(function(){
+				$('#search_form').submit();
+			});
 		}
 	};
 })();

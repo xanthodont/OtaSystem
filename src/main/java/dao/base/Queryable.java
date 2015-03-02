@@ -100,7 +100,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	}
 	
 	private Query getQuery() {
-		//System.out.println(toSqlString());
+		System.out.println(toSqlString());
 		Query query = session.createQuery(toSqlString());
 		query.setCacheMode(CacheMode.IGNORE);  // 不和二级缓存交换数据
 		if (paramValueList != null && !paramValueList.isEmpty()) {
@@ -125,7 +125,8 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		return toCount(true);
 	}
 	public long toCount(boolean isClosed) {
-		List<TEntity> list = getQuery().list();
+		List list = getQuery().list();
+		if (list.size() == 0) return 0; 
 		long count = (long) list.get(0);
 		if (isClosed) session.close();
 		return count;
@@ -201,7 +202,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 						builder.append(" AND ");
 					}
 					builder.append(sqlProperty.getName())
-						   .append(sqlProperty.getType())
+						   .append(" ").append(sqlProperty.getType()).append(" ")
 						   .append("?");
 					paramValueList.add(sqlProperty.getValue());
 				}
@@ -213,7 +214,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 						builder.append(" OR ");
 					}
 					builder.append(sqlProperty.getName())
-					   	   .append(sqlProperty.getType())
+					   	   .append(" ").append(sqlProperty.getType()).append(" ")
 					       .append("?");
 					paramValueList.add(sqlProperty.getValue());
 				}

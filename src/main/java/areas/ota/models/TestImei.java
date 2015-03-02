@@ -19,8 +19,8 @@ public class TestImei {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="imei")
-	private long imei;
+	@Column(name="imei", length=20)
+	private String imei;
 	
 	@Column(name="status")
 	private int status;
@@ -33,11 +33,11 @@ public class TestImei {
 		this.id = id;
 	}
 
-	public long getImei() {
+	public String getImei() {
 		return imei;
 	}
 
-	public void setImei(long imei) {
+	public void setImei(String imei) {
 		this.imei = imei;
 	}
 

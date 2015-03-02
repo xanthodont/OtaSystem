@@ -43,8 +43,6 @@
 					<th class="hidden-480">${i18n("version.versionName")}</th>
 					<th class="hidden-480">${i18n("version.androidVersion")}</th>
 					<th class="hidden-480">${i18n("version.createTime")}</th>
-					<th class="hidden-480">${i18n("version.publishTime")}</th>
-					<th class="hidden-480">${i18n("version.status")}</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -57,9 +55,7 @@
 					<td class="hidden-480">${v.buildNumber}</td>
 					<td class="hidden-480 format" >${v.versionName}</td>
 					<td class="hidden-480 format" >${v.androidVersion}</td>
-					<td class="hidden-480 format" >${v.createTime}</td>
-					<td class="hidden-480 format" >${v.publishTime}</td>
-					<td class="hidden-480">${v.status}</span></td>
+					<td class="hidden-480 format" >${v.createTimeStr}</td>
 					<td>
 						<a href="javascript:;" class="btn mini purple edit" key="${v.id}"><i class="icon-edit"></i> ${i18n("edit")}</a>
 						<a href="javascript:;" class="btn mini black delete" key="${v.id}"><i class="icon-trash"></i> ${i18n("delete")}</a>

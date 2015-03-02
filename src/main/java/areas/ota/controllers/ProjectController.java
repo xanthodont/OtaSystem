@@ -6,6 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import utils.StringUtil;
 import areas.ota.models.Project;
 import areas.user.models.Account;
 
@@ -47,13 +48,15 @@ public class ProjectController extends BaseController{
 	
 	public Result list(
 			@Param(value="page") int page, 
-			@Param(value="projectId") long projectId) {
+			@Param(value="product") String product,
+			@Param(value="language") String language) {
 		String method = new Throwable().getStackTrace()[0].getMethodName();
 		String link = router.getReverseRoute(getClass(), method);
 		
 		IQueryable<Project> query = projectDao.all();
-		if (projectId > 0) query = query.where(c -> c.equals("id", projectId));
-		PageList<Project> projects = query.toPageList(link, page, 10);
+		if (!StringUtil.isEmpty(product)) query = query.where(c -> c.equals("product", product));
+		if (!StringUtil.isEmpty(language)) query = query.where(c -> c.equals("language", language));
+		PageList<Project> projects = query.toPageList(link, page, 5);
 		return Results.ok()
 				.render("projects", projects)
 				.supportedContentTypes(

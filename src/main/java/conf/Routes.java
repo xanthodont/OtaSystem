@@ -25,6 +25,7 @@ import areas.user.controllers.AccountController;
 import areas.user.controllers.RoleController;
 import areas.ota.controllers.DeltaController;
 import areas.ota.controllers.ProjectController;
+import areas.ota.controllers.TestImeiController;
 import areas.ota.controllers.VersionController;
 import controllers.ApiController;
 import controllers.ApplicationController;
@@ -85,14 +86,25 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/ota/version").with(VersionController.class, "list");
         router.GET().route("/ota/version/list").with(VersionController.class, "list");
         router.POST().route("/ota/version/list").with(VersionController.class, "list");
+        router.GET().route("/ota/version/getList").with(VersionController.class, "getList");
         router.GET().route("/ota/version/add").with(VersionController.class, "add");
         router.POST().route("/ota/version/save").with(VersionController.class, "save");
         router.POST().route("/ota/version/delete").with(VersionController.class, "delete");
         
-        router.GET().route("/ota/delta").with(DeltaController.class, "list");
+        
         router.GET().route("/ota/delta/list").with(DeltaController.class, "list");
+        router.POST().route("/ota/delta/list").with(DeltaController.class, "list");
+        router.GET().route("/ota/delta").with(DeltaController.class, "list");
+        
         router.POST().route("/ota/delta/setStatus").with(DeltaController.class, "setStatus");
         router.POST().route("/ota/delta/uploadfile/{deltaId}").with(DeltaController.class, "uploadfile");
+        
+        router.GET().route("/ota/testimei/list").with(TestImeiController.class, "list");
+        router.POST().route("/ota/testimei/list").with(TestImeiController.class, "list");
+        router.GET().route("/ota/testimei").with(TestImeiController.class, "list");
+        router.GET().route("/ota/testimei/getList").with(TestImeiController.class, "getList");
+        router.GET().route("/ota/testimei/setStatus").with(TestImeiController.class, "setStatus");
+        router.GET().route("/ota/testimei/delete").with(TestImeiController.class, "delete");
         
         /** API */
         router.POST().route("/api/login").with(ApiController.class, "login");

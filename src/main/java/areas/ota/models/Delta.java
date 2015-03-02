@@ -1,6 +1,9 @@
 package areas.ota.models;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="delta")
@@ -29,6 +33,8 @@ public class Delta {
 	
 	@Column(name="updateTime")
 	private long updateTime;
+	@Transient
+	private String updateTimeStr;
 	
 	@Column(name="size")
 	private long size;
@@ -93,6 +99,16 @@ public class Delta {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	
+	public String getUpdateTimeStr() {
+		Date d = new Date(this.updateTime);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return df.format(d);
+	}
+
+	public void setUpdateTimeStr(String updateTimeStr) {
+		this.updateTimeStr = updateTimeStr;
 	}
 	
 	public class Status {

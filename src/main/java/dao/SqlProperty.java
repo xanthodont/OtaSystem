@@ -9,6 +9,8 @@ public class SqlProperty
 {
 	public final String EQUAL = "="; 
 	public final String NOT_EQUAL = "!=";
+	public final String LIKE = "like";
+	public final String IN = "in";
 	
 	private String name;
 	private Object value;
@@ -26,10 +28,17 @@ public class SqlProperty
 		this.value = value;
 	}
 	public String getType() {
+		
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
+		if (type.equals(LIKE)) {
+			String value = (String) this.getValue();
+			setValue("%"+value+"%");
+		} else if (type.equals(IN)) {
+			
+		}
 	}
 	
 	public void equals(String name, Object value) {
@@ -42,5 +51,11 @@ public class SqlProperty
 		this.setName(name);
 		this.setValue(value);
 		this.setType(NOT_EQUAL);
+	}
+	
+	public void like(String name, Object value) {
+		this.setName(name);
+		this.setValue(value);
+		this.setType(LIKE);
 	}
 }

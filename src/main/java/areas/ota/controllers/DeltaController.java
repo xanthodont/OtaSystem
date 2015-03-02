@@ -20,8 +20,10 @@ import utils.ProjectUtil;
 import com.google.inject.Inject;
 
 import areas.ota.models.Delta;
+import areas.ota.models.Project;
 import areas.ota.models.Version;
 import models.JResponse;
+import models.PageList;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -31,12 +33,15 @@ import ninja.params.Param;
 import ninja.params.PathParam;
 import controllers.BaseController;
 import dao.base.IDatabase;
+import dao.base.IQueryable;
 import filters.AuthorizationFilter;
 
 @FilterWith(AuthorizationFilter.class)
 public class DeltaController extends BaseController {
 	@Inject
 	private IDatabase<Delta> dao;
+	@Inject
+	private IDatabase<Version> versionDao;
 
 	@Inject
 	public DeltaController(Messages msg) {
@@ -44,11 +49,23 @@ public class DeltaController extends BaseController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Result list() {
-		List<Delta> entities = dao.all().toList();
+	public Result list(
+			@Param("page") int page,
+			@Param("versionId") long versionId) {
+		String method = new Throwable().getStackTrace()[0].getMethodName();
+		String link = router.getReverseRoute(getClass(), method);
+		
+		IQueryable<Delta> query = dao.all();
+		if (versionId > 0) 
+			query.and(c -> c.equals("fromVersionId", versionId))
+				 .or(c -> c.equals("toVersionId", versionId));
+		
+		PageList<Delta> entities = query.toPageList(link, page, 10);
 		
 		return Results.html().render("deltas", entities);
 	}
+	
+	
 	
 	public Result add() {
 		

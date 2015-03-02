@@ -18,6 +18,7 @@
         <mapping class="areas.ota.models.Project"/>  
         <mapping class="areas.ota.models.Version"/>    
         <mapping class="areas.ota.models.Delta"/>    
+        <mapping class="areas.ota.models.TestImei"/>    
     </session-factory>
     
 </hibernate-configuration>

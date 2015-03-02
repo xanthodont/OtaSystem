@@ -22,11 +22,15 @@ var lang = {
 		sure_publish: '确认发布？',
 		sure_retest: '确认重新测试？',
 		sure_undo: '确认撤销发布？'
+	}, 
+	testimei: {
+		sure_active: '确认激活？',
+		sure_forbidden: '确认阻止？',
 	}
 };
 
 /**
- * jquery.validator.js 中文化
+ * jquery.validator.js 汉化
  */
 var cnMsg = {  
 	required: "必选字段",   
@@ -48,3 +52,18 @@ var cnMsg = {
 	min: jQuery.format("请输入一个最小为 {0} 的值")
 };
 jQuery.extend(jQuery.validator.messages, cnMsg);
+
+/**
+ * select2.js 汉化
+ */
+(function ($) {
+    "use strict";
+    $.extend($.fn.select2.defaults, {
+        formatNoMatches: function () { return "没有找到匹配项"; },
+        formatInputTooShort: function (input, min) { var n = min - input.length; return "请再输入" + n + "个字符";},
+        formatInputTooLong: function (input, max) { var n = input.length - max; return "请删掉" + n + "个字符";},
+        formatSelectionTooBig: function (limit) { return "你只能选择最多" + limit + "项"; },
+        formatLoadMore: function (pageNumber) { return "加载结果中..."; },
+        formatSearching: function () { return "搜索中..."; }
+    });
+})(jQuery);

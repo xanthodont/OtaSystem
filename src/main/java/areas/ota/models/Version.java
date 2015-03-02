@@ -1,5 +1,8 @@
 package areas.ota.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="version")
@@ -33,6 +39,8 @@ public class Version {
 	
 	@Column(name="createTime") 
 	private long createTime;
+	@Transient
+	private String createTimeStr;
 	
 	@Column(name="publishTime")
 	private long publishTime;
@@ -51,9 +59,12 @@ public class Version {
 	private Project project; 
 	
 	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fromVersionId", referencedColumnName="id")
 	private Set<Delta> fromDeltas;
+	
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="toVersionId", referencedColumnName="id")
 	private Set<Delta> toDeltas;
@@ -156,5 +167,13 @@ public class Version {
 		this.fingerprint = fingerprint;
 	}
 
-	
+	public String getCreateTimeStr() {
+		Date d = new Date(this.createTime);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return df.format(d);
+	}
+
+	public void setCreateTimeStr(String createTimeStr) {
+		this.createTimeStr = createTimeStr;
+	}
 }

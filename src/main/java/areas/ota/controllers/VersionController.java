@@ -53,6 +53,16 @@ public class VersionController extends BaseController {
 		return Results.html().render("versions", versions);
 	}
 	
+	public Result getList(@Param("q") String versionName) {
+		List<Version> versions = dao.all().where(c -> c.like("versionName", versionName)).toList();
+		return Results.ok()
+				.render("versions", versions)
+				.supportedContentTypes(
+					Result.TEXT_HTML,
+					Result.APPLICATON_JSON
+				);
+	}
+	
 	public Result add() {
 		
 		return Results.html();
