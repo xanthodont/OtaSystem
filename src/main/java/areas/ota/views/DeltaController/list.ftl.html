@@ -13,21 +13,9 @@
 		<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
 			
-			<a href="javascript:;" class="reload"></a>
-			
 		</div>
 	</div>
 	<div class="portlet-body">
-		<div class="clearfix">
-			<div class="btn-group">
-				<a id="sample_editable_2_new" href="#" class="btn blue">
-					${i18n("delta.addtestimei")} <i class="icon-plus"></i>
-				</a>
-			</div>
-			
-		</div>
-		
-		
 		<div class="controls controls-row">
 		  <form action="ota/delta/list" method="POST" id="search_form">
 			<label class="span1 control-label"><strong>${i18n("version.versionName")}</strong></label>
@@ -95,7 +83,7 @@
 								<#break>
 							<#case 2>
 								<a href="javascript:;" class="btn mini red nopass" key="${d.id}">
-									<i class="icon-upload-alt"></i> ${i18n("delta.status_nopass")}</a>
+									<i class="icon-ban-circle"></i> ${i18n("delta.status_nopass")}</a>
 								<a href="javascript:;" class="btn mini green pass" key="${d.id}">
 									<i class="icon-ok"></i> ${i18n("delta.status_pass")}</a>
 								<#break>

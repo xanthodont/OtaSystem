@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 
 import service.IAccountService;
 import models.JResponse;
+import models.PageList;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
@@ -31,10 +32,11 @@ import controllers.BaseController;
 import dao.AccountDao;
 import dao.IBasicDao;
 import dao.base.IDatabase;
+import dao.base.IQueryable;
 import filters.AuthorizationFilter;
 import filters.PrivilegeFilter;
 
-@Singleton
+@FilterWith(AuthorizationFilter.class)
 public class AccountController extends BaseController {
 	@Inject
 	private IDatabase<Account> accountDao;
@@ -52,18 +54,20 @@ public class AccountController extends BaseController {
 	@Inject
 	private Logger logger;
 	
-	
-	
-	
-	
-	
-	@FilterWith(AuthorizationFilter.class)
-	public Result list(FlashScope flashScope) {
-		List<Account> accounts = accountDao.all().toList();
-		long count = accounts.size();
-		flashScope.put("count", count);
+	public Result list(
+			@Param(value="page") int page) {
+		String method = new Throwable().getStackTrace()[0].getMethodName();
+		String link = router.getReverseRoute(getClass(), method);
 		
-		return Results.html().render("accounts", accounts);
+		IQueryable<Account> query = accountDao.all();
+		PageList<Account> accounts = query.toPageList(link, page, 10);
+		
+		return Results.ok()
+				.render("accounts", accounts)
+				.supportedContentTypes(
+					Result.TEXT_HTML,
+					Result.APPLICATON_JSON
+				);
 	}
 	
 	public Result edit() {
@@ -82,15 +86,11 @@ public class AccountController extends BaseController {
 		}
 	}
 	
-	@FilterWith(AuthorizationFilter.class)
+	
 	public Result profile() {
 		
 		return Results.html();
 	}
-	
-	@FilterWith({
-		AuthorizationFilter.class,
-		PrivilegeFilter.class})
 	public Result add() {
 		List<Role> roles = roleDao.all().toList(); 
 		return Results.html().render("roles", roles);

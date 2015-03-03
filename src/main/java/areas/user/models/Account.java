@@ -1,9 +1,14 @@
 package areas.user.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.*;
 
-
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="account")
@@ -29,12 +34,17 @@ public class Account {
 	@Column(name="registerTime")
 	private Long registerTime;
 	
+	
+	@Transient
+	private String registerTimeStr;
+	
 
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Profile profile;
 	
+
 	@ManyToOne
 	@JoinColumn(name="roleId", referencedColumnName="id")
 	private Role role;
@@ -93,6 +103,16 @@ public class Account {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getRegisterTimeStr() {
+		Date d = new Date(this.registerTime);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		return df.format(d);
+	}
+
+	public void setRegisterTimeStr(String registerTimeStr) {
+		this.registerTimeStr = registerTimeStr;
 	}
 
 	

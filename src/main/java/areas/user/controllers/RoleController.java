@@ -7,12 +7,15 @@ import areas.user.models.Role;
 
 import com.google.inject.Inject;
 
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.i18n.Messages;
 import controllers.BaseController;
 import dao.base.IDatabase;
+import filters.AuthorizationFilter;
 
+@FilterWith(AuthorizationFilter.class)
 public class RoleController extends BaseController {
 	@Inject
 	private IDatabase<Role> dao;

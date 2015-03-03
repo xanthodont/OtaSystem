@@ -37,7 +37,7 @@
 			</thead>
 			<tbody>
 				<#assign i = 1>
-				<#list accounts as act>
+				<#list accounts.list as act>
 				<tr class="odd gradeX">
 					<td>${i} <#assign i = i+1></td>
 					<td>${act.username}</td>
@@ -46,16 +46,19 @@
 						<#if act.email??>${act.email}
 						<#else>${i18n("notSetting")}</#if></a>
 					</td>
-					<td class="hidden-480 format" >${act.registerTime}</td>
+					<td class="hidden-480 format" >${act.registerTimeStr}</td>
 					<td ><span class="label label-success">${act.role.roleName}</span></td>
 					<td>
-						<a href="javascript:;" class="btn mini purple edit" key="${act.id}"><i class="icon-edit"></i> ${i18n("edit")}</a>
+						<#if act.username != 'admin'>
+						<a href="javascript:developing();" class="btn mini purple edit" key="${act.id}"><i class="icon-edit"></i> ${i18n("edit")}</a>
 						<a href="javascript:;" class="btn mini black delete" key="${act.id}"><i class="icon-trash"></i> ${i18n("delete")}</a>
+						</#if>
 					</td>
 				</tr>
 				</#list>
 			</tbody>
 		</table>
+		<@layout.pager accounts.pager></@layout.pager>  
 	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->

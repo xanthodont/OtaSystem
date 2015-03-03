@@ -9,3 +9,7 @@ var constants = {
 		fail: 0
 	}
 };
+
+function developing() {
+	alert('开发中……');
+}

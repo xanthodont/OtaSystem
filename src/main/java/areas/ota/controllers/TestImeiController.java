@@ -1,6 +1,9 @@
 package areas.ota.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import utils.StringUtil;
 import areas.ota.models.TestImei;
@@ -32,12 +35,13 @@ public class TestImeiController extends BaseController {
 	}
 	
 	public Result list(
-			@Param("page") int page) {
+			@Param("page") int page,
+			@Param("imei") String imei) {
 		String method = new Throwable().getStackTrace()[0].getMethodName();
 		String link = router.getReverseRoute(getClass(), method);
 		
 		IQueryable<TestImei> query = dao.all();
-		
+		if (!StringUtil.isEmpty(imei) && !imei.equals("-1")) query.where(c -> c.like("imei", imei));
 		PageList<TestImei> imeis = query.toPageList(link, page, 10);
 		
 		return Results.html().render("imeis", imeis);
@@ -80,16 +84,28 @@ public class TestImeiController extends BaseController {
 		}
 	}
 	
-	public Result save(TestImei testImei) {
-		long count = dao.count()
-				.and(c -> c.equals("imei", testImei.getImei()))
-				.toCount();
-		if (count > 0) {
-			return Results.json().render(JResponse.fail(msg.get("testimei.hasexit", language).get()));
+	public Result save(@Param("imeis") String imeis) {
+		List<String> list = new ArrayList<String>(); 
+		String[] imeiList = imeis.split("\n");
+		for (int i = 0, len = imeiList.length; i < len; i++) {
+			String imei = imeiList[i];
+			long count = dao.count()
+					.and(c -> c.equals("imei", imei))
+					.toCount();
+			if (count > 0) {
+				list.add(imei);
+			} else {
+				TestImei ti = new TestImei();
+				ti.setStatus(1);
+				ti.setImei(imei);
+				dao.insert(ti).commit();
+			}
+		}
+		if (list.size() > 0) {
+			return Results.json().render("r", JResponse.fail(msg.get("testimei.hasexit", language).get()))
+								 .render("l", list);
 		} else {
-			testImei.setStatus(1);
-			dao.insert(testImei).commit();
-			return Results.json().render(JResponse.success("ota/testImei"));
-		} 
+			return Results.json().render("r", JResponse.success("ota/testimei"));
+		}
 	}
 }

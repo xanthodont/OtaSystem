@@ -4,7 +4,7 @@
 var Navigation = (function() {
 	var dataConfig = [
 		{admin: []},
-		{ota: ['project', 'version', 'delta']},
+		{ota: ['project', 'version', 'delta', 'testimei']},
 		{user: ['account', 'role']},
 		{chart: []},
 		{system: []}

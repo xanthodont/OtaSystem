@@ -85,8 +85,10 @@ public class ApiController extends BaseController {
 			if (!StringUtil.isEmpty(mode) && mode.equals("debug")) {
 				istestDevice = true;
 			} else { // 判断是否是测试IMEI号
-				long count = testImeiDao.count(c -> c.equals("imei", imei));
-				if (count == 1) 
+				long count = testImeiDao.where(c -> c.equals("status", 1))
+										.and(c -> c.equals("imei", imei))
+										.toCount();
+				if (count > 0) 
 					istestDevice = true;
 			}
 			
@@ -175,7 +177,7 @@ public class ApiController extends BaseController {
 			cvr.setStatus(OtaConstants.success_code);
 			cvr.setAndroid_version(delta.getToVersion().getAndroidVersion());
 			//cvr.setFingerprint(delta.getToVersion().getFingerprint());
-			cvr.setName(delta.getToVersion().getBuildNumber());
+			cvr.setName(delta.getToVersion().getVersionName());
 			cvr.setRelease_notes(delta.getToVersion().getDescription());
 			cvr.setSize(delta.getSize());
 			cvr.setVersionId(delta.getId());

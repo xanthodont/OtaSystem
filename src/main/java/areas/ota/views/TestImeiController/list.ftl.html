@@ -1,9 +1,9 @@
 <#import "/views/layout/baseLayout.ftl.html" as layout>
-<@layout.header '${i18n("ota.version")}'>  
+<@layout.header '${i18n("ota.testimei")}'>  
   
 </@layout.header>
 
-<@layout.content '${i18n("nav.ota.version")}' '${i18n("nav.ota.version.description")}'>
+<@layout.content '${i18n("nav.ota.testimei")}' '${i18n("nav.ota.testimei.description")}'>
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet box light-grey">
 	<div class="portlet-title">
@@ -11,22 +11,27 @@
 		<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
 			
-			<a href="javascript:;" class="reload"></a>
-			
 		</div>
 	</div>
 	<div class="portlet-body">
 		<div class="clearfix">
+			<div class="btn-group">
+				<a id="sample_editable_1_new" href="javascript:;" class="btn green add">
+					${i18n("addnew")} <i class="icon-plus"></i>
+				</a>
+			</div>
+		
 			<div class="controls controls-row">
-				<label class="control-label"><strong>${i18n("testimei.imei")}</strong></label>
+				<form id="form_search" action="ota/testimei/list" method="POST"> 
 				<div class="controls">
 					<input type="hidden" id="select2_imei" class="span3 select2" name="imei">
 				</div>
-				<div class="btn-group span2">
-					<a id="sample_editable_1_new" href="ota/version/add" class="btn green">
-						${i18n("addnew")} <i class="icon-plus"></i>
+				<div class="btn-group">
+					<a id="sample_editable_1_new search" href="javascript:;" class="btn blue">
+						${i18n("search")} <i class="icon-search"></i>
 					</a>
 				</div>
+				</form>
 			</div>
 		</div>
 		
@@ -58,7 +63,7 @@
 					<td>
 						<#switch e.status>
 							<#case 0>
-								<a href="javascript:;" class="btn mini green active" key="${e.id}"><i class="icon-ok"></i> ${i18n("active")}</a>
+								<a href="javascript:;" class="btn mini green imei_active" key="${e.id}"><i class="icon-ok"></i> ${i18n("active")}</a>
 							  	<#break>
 							<#case 1>
 								<a href="javascript:;" class="btn mini red forbidden" key="${e.id}"><i class="icon-ban-circle"></i> ${i18n("forbidden")}</a>
@@ -71,6 +76,16 @@
 			</tbody>
 		</table>
 		<@layout.pager imeis.pager></@layout.pager>  
+	</div>
+	
+	<div id="add_dialog" class="controls">
+		<form id="form_add">
+			<label class="control-label"><strong>${i18n("testimei.add.notice")}</strong></label>
+			<div class="controls">
+				<textarea rows="10" cols="" style="width:90%" id="imei_area" name="imeis"></textarea>
+			</div>
+			
+		</form>
 	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->

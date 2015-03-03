@@ -22,6 +22,15 @@ var AccountList = (function(){
 					});
 				}
 			});
+			
+			$.ajax({
+				url: 'user/account/list',
+				type: 'get',
+				dataType: 'json',
+				success: function(resp) {
+					
+				}
+			});
 		}
 	};
 })();

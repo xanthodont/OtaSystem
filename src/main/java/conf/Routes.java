@@ -103,8 +103,9 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/ota/testimei/list").with(TestImeiController.class, "list");
         router.GET().route("/ota/testimei").with(TestImeiController.class, "list");
         router.GET().route("/ota/testimei/getList").with(TestImeiController.class, "getList");
-        router.GET().route("/ota/testimei/setStatus").with(TestImeiController.class, "setStatus");
-        router.GET().route("/ota/testimei/delete").with(TestImeiController.class, "delete");
+        router.POST().route("/ota/testimei/setStatus").with(TestImeiController.class, "setStatus");
+        router.POST().route("/ota/testimei/delete").with(TestImeiController.class, "delete");
+        router.POST().route("/ota/testimei/save").with(TestImeiController.class, "save");
         
         /** API */
         router.POST().route("/api/login").with(ApiController.class, "login");
