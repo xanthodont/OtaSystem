@@ -11,8 +11,7 @@ import ninja.Result;
  *
  */
 public class PrivilegeFilter implements Filter {
-	
-	
+	public static final String PRIVILEGE = "privilege";
 
 	@Override
 	public Result filter(FilterChain filterChain, Context context) {

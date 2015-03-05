@@ -34,7 +34,6 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 	
 	private List<SqlProperty> andCondition;
 	private List<SqlProperty> orCondition;
-	private Map<String, SqlProperty> whereCondition;
 	private LimitCondition limitCondition;
 	private OrderByCondition orderByCondition; 
 	
@@ -50,7 +49,6 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		// TODO Auto-generated constructor stub
 		this.session = session;
 		this.persistentClass = persistentClass;
-		this.whereCondition = new HashMap<String, SqlProperty>();
 		this.andCondition = new ArrayList<SqlProperty>();
 		this.orCondition = new ArrayList<SqlProperty>();
 		this.paramValueList = new ArrayList<Object>();
@@ -137,6 +135,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
 		List<TEntity> list = getQuery().list();
+		session.getTransaction().commit();
 		session.close();
 		return list;
 	}
@@ -162,6 +161,7 @@ public class Queryable<TEntity> extends ArrayList implements IQueryable<TEntity>
 		pageList.getPager().setPrev(prev);
 		pageList.getPager().setNext(next);
 		pageList.getPager().setActionLink(actionLink);
+		
 		return pageList; 
 	}
 	@Override

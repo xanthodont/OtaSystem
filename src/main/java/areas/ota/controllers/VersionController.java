@@ -73,7 +73,7 @@ public class VersionController extends BaseController {
 		/**
 		 * 处理字符
 		 */
-		version.setBuildNumber(version.getBuildNumber().replace("_", "$"));
+		//version.setBuildNumber(version.getBuildNumber().replace("_", "$"));
 		
 		long count = dao.count()
 				.and(c -> c.equals("buildNumber", version.getBuildNumber()))
@@ -100,6 +100,29 @@ public class VersionController extends BaseController {
 			return Results.json().render(JResponse.success("ota/version"));
 		} 
 	} 
+	
+	public Result getVersion(@Param(value="id") long id) {
+		Version v = dao.first(c -> c.equals("id", id));
+		if (v == null) {
+			return Results.json().render("r", JResponse.fail(""));
+		} else {
+			return Results.json().render("r", JResponse.success("ota/version")).render("version", v);
+		}
+	}
+	
+	public Result update(Version version) {
+		Version entity = dao.first(c -> c.equals("id", version.getId()));
+		if (entity == null) {
+			return Results.json().render(JResponse.fail("fail"));
+		} else {
+			entity.setBuildNumber(version.getBuildNumber());
+			entity.setVersionName(version.getVersionName());
+			entity.setAndroidVersion(version.getAndroidVersion());
+			entity.setDescription(version.getDescription());
+			dao.update(entity).commit();
+			return Results.json().render(JResponse.success("ota/version/list"));
+		}
+	}
 	
 	public Result delete(@Param(value="id") long id) {
 		Version entity = dao.first(c -> c.equals("id", id));

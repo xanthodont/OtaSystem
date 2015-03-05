@@ -85,7 +85,8 @@ public class ApiController extends BaseController {
 			if (!StringUtil.isEmpty(mode) && mode.equals("debug")) {
 				istestDevice = true;
 			} else { // 判断是否是测试IMEI号
-				long count = testImeiDao.where(c -> c.equals("status", 1))
+				long count = testImeiDao.count()
+										.where(c -> c.equals("status", 1))
 										.and(c -> c.equals("imei", imei))
 										.toCount();
 				if (count > 0) 
@@ -122,7 +123,7 @@ public class ApiController extends BaseController {
 		logger.debug(String.format("Param --- version:%s, token:%s, istest:%b", projectVersion, token, istestDevice));
 		
 		if (istestDevice || token.equals(session.getAttribute(OtaConstants.SESSION_TOKEN))) {
-			String[] projects = projectVersion.split("_");
+			String[] projects = projectVersion.split(";");
 			if (projects.length < 4) {
 				return Results.json().render(new OtaResponse(OtaConstants.param_lost_code, OtaConstants.param_lost_info));
 			}

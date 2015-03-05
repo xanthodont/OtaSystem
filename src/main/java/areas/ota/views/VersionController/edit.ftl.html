@@ -1,0 +1,43 @@
+
+
+<div class="alert alert-error hide">
+	<button class="close" data-dismiss="alert"></button>
+	<span>${i18n("validation.fail")}</span>
+</div>
+<div class="alert alert-success hide">
+	<button class="close" data-dismiss="alert"></button>
+	${i18n("validation.success")}
+</div>
+<input type="hidden" id="id" class="span6 m-wrap" name="id" disabled />
+<div class="control-group">
+	<label class="control-label">${i18n("project")}<span class="required">*</span></label>
+	<div class="controls">
+		<input type="text" id="projectId" class="span6 m-wrap" name="projectName" disabled />
+	</div>
+</div>
+
+<div class="control-group">
+	<label class="control-label">${i18n("version.buildNumber")}<span class="required">*</span></label>
+	<div class="controls">
+		<input type="text" id="v_buildnumber" class="span6" name="buildNumber">
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label">${i18n("version.versionName")}<span class="required">*</span></label>
+	<div class="controls">
+		<input type="text" id="v_versionname" class="span6" name="versionName">
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label">${i18n("version.androidVersion")}<span class="required">*</span></label>
+	<div class="controls">
+		<input type="text" id="v_androidversion" class="span6 " name="androidVersion">
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label">${i18n("version.description")}</label>
+	<div class="controls">
+		<textarea type="text" id="v_description" class="span6 " name="description" rows="5" cols=""></textarea>
+	</div>
+</div>
+

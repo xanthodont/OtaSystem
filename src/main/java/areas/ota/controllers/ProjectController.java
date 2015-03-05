@@ -100,10 +100,12 @@ public class ProjectController extends BaseController{
 		/**
 		 * 处理字符
 		 */
+		/*
 		project.setOem(project.getOem().replace("_", "$"));
 		project.setProduct(project.getProduct().replace("_", "$"));
 		project.setLanguage(project.getLanguage().replace("_", "$"));
 		project.setOperator(project.getOperator().replace("_", "$"));
+		*/
 		
 		List<Project> pl = projectDao.all()
 				.and(c -> c.equals("oem", project.getOem()))
@@ -175,4 +177,7 @@ public class ProjectController extends BaseController{
 		return Results.json().render(properties);
 	}
 
+	public void t() {
+		long count = projectDao.count((c1 -> c1.equals("1", "1")), c2 -> c2.equals("3", 2));
+	}
 }

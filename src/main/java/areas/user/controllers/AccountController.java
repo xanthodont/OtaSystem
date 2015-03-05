@@ -102,7 +102,7 @@ public class AccountController extends BaseController {
 			return Results.json().render(JResponse.fail(""));
 		} else {
 			accountDao.delete(a).commit();
-			return Results.json().render(JResponse.success(""));
+			return Results.json().render(JResponse.success("user/account/list"));
 		}
 	}
 }

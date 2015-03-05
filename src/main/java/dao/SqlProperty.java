@@ -7,10 +7,10 @@ package dao;
  */
 public class SqlProperty 
 {
-	public final String EQUAL = "="; 
-	public final String NOT_EQUAL = "!=";
-	public final String LIKE = "like";
-	public final String IN = "in";
+	private final String EQUAL = "="; 
+	private final String NOT_EQUAL = "!=";
+	private final String LIKE = "like";
+	private final String IN = "in";
 	
 	private String name;
 	private Object value;

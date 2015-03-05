@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ import javax.persistence.Transient;
 import javax.swing.text.DateFormatter;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -57,10 +60,11 @@ public class Project {
 	@Column(name="description")
 	private String description;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="projectId", referencedColumnName="id")
+	@OneToMany(targetEntity=Version.class, cascade=CascadeType.REMOVE)
+	@JoinColumn(name="projectId", updatable=false)
+	@Fetch(FetchMode.JOIN)
 	@JsonIgnore
-	private Set<Version> versions; 
+	private Set<Version> versions = new HashSet<Version>(); 
 	
 	/**
 	 * 默认取值

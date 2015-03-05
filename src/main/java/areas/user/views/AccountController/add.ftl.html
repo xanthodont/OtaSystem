@@ -9,9 +9,6 @@
 		<div class="caption"><i class="icon-reorder"></i>${i18n("account.addnew")}</div>
 			<div class="tools">
 				<a href="javascript:;" class="collapse"></a>
-
-				<a href="javascript:;" class="reload"></a>
-
 			</div>
 		</div>
 	<div class="portlet-body form">
@@ -69,7 +66,7 @@
 				<label class="control-label">${i18n("register.role")}<span class="required">*</span></label>
 				<div class="controls">
 					<#list roles as r>
-					<label class="radio line">
+					<label class="line">
 					<input type="radio" name="roleId" value="${r.id}"  />
 						${r.roleName}
 					</label>

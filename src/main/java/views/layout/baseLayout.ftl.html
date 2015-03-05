@@ -152,13 +152,13 @@
 <div class="pagination pagination-right">
   <ul>
     <li class="<#if pagination.pageIndex=1>disabled</#if>">
-    	<a href="${pagination.actionLink}?page=1"></i> ${i18n("first_page")}</a></li>
+    	<a href="<#if pagination.pageIndex=1>javascript:;<#else>${pagination.actionLink}?page=1</#if>"></i> ${i18n("first_page")}</a></li>
     <li class="<#if pagination.pageIndex=1>disabled</#if>">
-    	<a href="${pagination.actionLink}?page=${pagination.prev}">${i18n("prev_page")}</a></li>
+    	<a href="<#if pagination.pageIndex=1>javascript:;<#else>${pagination.actionLink}?page=${pagination.prev}</#if>">${i18n("prev_page")}</a></li>
     <#assign begin = pagination.pageIndex-4>
     <#assign end = pagination.pageIndex+4>
     <#if (begin > 1)>
-    	<li class="disabled"><a href="javascript(void)">...</a></li>
+    	<li class="disabled"><a href="javascript:;">...</a></li>
     <#else>
     	<#assign begin = 1>
     </#if>
@@ -168,7 +168,7 @@
     <#list begin..end as page>
     
     <li class="<#if pagination.pageIndex=page>active</#if>">
-    	<a href="${pagination.actionLink}?page=${page}">${page}</a></li>
+    	<a href="<#if pagination.pageIndex=page>javascript:;<#else>${pagination.actionLink}?page=${page}</#if>">${page}</a></li>
     </#list>
     
     <#if (end != pagination.totalPage)>
@@ -176,9 +176,9 @@
     </#if>
     
     <li class="<#if pagination.pageIndex=pagination.totalPage>disabled</#if>">
-    	<a href="${pagination.actionLink}?page=${pagination.next}">${i18n("next_page")}</a></li>
+    	<a href="<#if pagination.pageIndex=pagination.totalPage>javascript:;<#else>${pagination.actionLink}?page=${pagination.next}</#if>">${i18n("next_page")}</a></li>
     <li class="<#if pagination.pageIndex=pagination.totalPage>disabled</#if>">
-    	<a href="${pagination.actionLink}?page=${pagination.totalPage}">${i18n("last_page")}</a></li>
+    	<a href="<#if pagination.pageIndex=pagination.totalPage>javascription:;<#else>${pagination.actionLink}?page=${pagination.totalPage}</#if>">${i18n("last_page")}</a></li>
   </ul>
 </div>
 </#macro>

@@ -3,6 +3,7 @@ package areas.ota.models;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -61,13 +62,13 @@ public class Version {
 	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="fromVersionId", referencedColumnName="id")
-	private Set<Delta> fromDeltas;
+	@JoinColumn(name="fromVersionId", referencedColumnName="id", updatable=false)
+	private Set<Delta> fromDeltas = new HashSet<Delta>();
 	
 	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="toVersionId", referencedColumnName="id")
-	private Set<Delta> toDeltas;
+	@JoinColumn(name="toVersionId", referencedColumnName="id", updatable=false)
+	private Set<Delta> toDeltas = new HashSet<Delta>();
 	
 	
 	public long getId() {

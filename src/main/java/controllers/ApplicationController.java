@@ -41,6 +41,7 @@ import com.google.inject.Singleton;
 
 import dao.IBasicDao;
 import filters.AuthorizationFilter;
+import filters.PrivilegeFilter;
 
 
 @Singleton
@@ -69,8 +70,8 @@ public class ApplicationController {
 			@Param("password") String password,
 			Session session) {
 		logger.debug(String.format("SessionId --- %s", session.getId()));
-		if (accountService.validateCredentials(username, password)) {
-			session.put(AuthorizationFilter.USERNAME, username);
+		if (accountService.validateCredentials(username, password, session)) {
+			
 			return Results.json().render(JResponse.success("admin"));
 		} else {
 			return Results.json().render(JResponse.fail(msg.get("login.notice.fail", language).get()));

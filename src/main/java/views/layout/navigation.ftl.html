@@ -12,10 +12,8 @@
 			<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 			<form class="sidebar-search">
 				<div class="input-box">
-				<!--  -->
 					<a href="javascript:;" class="remove"></a> 
-					<input type="text" placeholder="Search..." /> 
-					<input type="button" class="submit"	value=" " />
+					<input type="text" placeholder="" class="disabled" />
 				</div>
 			</form> 
 			<!-- END RESPONSIVE QUICK SEARCH FORM -->
@@ -26,6 +24,8 @@
 				<span class="title">${i18n("nav.dashboard")}</span> 
 			</a>
 		</li>
+		
+		
 		
 		<li class="menu-bar">
 			<a href="javascript:;"> 
@@ -41,15 +41,7 @@
 			</ul>
 		</li>
 		
-		<li class="menu-bar"><a href="javascript:;"> <i class="icon-user"></i>
-				<span class="title">${i18n("nav.user")}</span> 
-				<span class="arrow "></span>
-		</a>
-			<ul class="sub-menu">
-				<li><a href="user/account">${i18n("nav.user.account")}</a></li>
-				<li><a href="user/role">${i18n("nav.user.role")}</a></li>
-			</ul>
-		</li>
+		
 		
 		<li class="menu-bar">
 			<a href="javascript:;"> 
@@ -59,6 +51,17 @@
 			</a>
 			<ul class="sub-menu">
 				<li><a href="javascript:developing();">${i18n("nav.static.download")}</a></li>
+			</ul>
+		</li>
+		
+		<#if (session.privilege == "3")>
+		<li class="menu-bar"><a href="javascript:;"> <i class="icon-user"></i>
+				<span class="title">${i18n("nav.user")}</span> 
+				<span class="arrow "></span>
+		</a>
+			<ul class="sub-menu">
+				<li><a href="user/account">${i18n("nav.user.account")}</a></li>
+				<li><a href="user/role">${i18n("nav.user.role")}</a></li>
 			</ul>
 		</li>
 		
@@ -72,6 +75,7 @@
 				
 			</ul>
 		</li>
+		</#if>
 	</ul>
 	<!-- END SIDEBAR MENU -->
 </div>

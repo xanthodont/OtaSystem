@@ -99,7 +99,7 @@ var AccountEdit = (function(){
                     var name = $(form).find('input[name="username"]').val();
                     var pswd = $(form).find('input[name="password"]').val();
                     var email = $(form).find('input[name="email"]').val();
-                    var roleId = $(form).find('input[name="roleId"]').val();
+                    var roleId = $(form).find(':input:checked[name="roleId"]').val();
                     $.ajax({
                     	url: 'user/account/save',
                     	type: 'POST',

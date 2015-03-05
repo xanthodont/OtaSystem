@@ -28,7 +28,6 @@
 					<th>${i18n("role.roleName")}</th>
 					<th class="hidden-480">${i18n("role.privilege")}</th>
 					<th></th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,10 +37,11 @@
 					<td>${i} <#assign i = i+1></td>
 					<td>${entity.roleName}</td>
 					<td class="hidden-480 format" >${entity.privilege}</td>
-					<td ><span class="label label-success"></span></td>
 					<td>
+						<!-- 
 						<a href="javascript:developing();" class="btn mini purple"><i class="icon-edit"></i>${i18n("edit")}</a>
 						<a href="javascript:developing();" class="btn mini black"><i class="icon-trash"></i>${i18n("delete")}</a>
+						 -->
 					</td>
 				</tr>
 				</#list>

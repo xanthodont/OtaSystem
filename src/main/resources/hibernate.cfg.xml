@@ -10,6 +10,7 @@
         <property name="hibernate.connection.password">root</property>    
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>    
         <property name="hibernate.show_sql">true</property> 
+        <property name="hibernate.cache.use_second_level_cache">false</property>
          
         <mapping class="areas.user.models.Account"/>  
         <mapping class="areas.user.models.Profile"/>  
@@ -19,6 +20,7 @@
         <mapping class="areas.ota.models.Version"/>    
         <mapping class="areas.ota.models.Delta"/>    
         <mapping class="areas.ota.models.TestImei"/>    
+        
     </session-factory>
     
 </hibernate-configuration>

@@ -88,7 +88,9 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/ota/version/list").with(VersionController.class, "list");
         router.GET().route("/ota/version/getList").with(VersionController.class, "getList");
         router.GET().route("/ota/version/add").with(VersionController.class, "add");
+        router.GET().route("/ota/version/getVersion").with(VersionController.class, "getVersion");
         router.POST().route("/ota/version/save").with(VersionController.class, "save");
+        router.POST().route("/ota/version/update").with(VersionController.class, "update");
         router.POST().route("/ota/version/delete").with(VersionController.class, "delete");
         
         

@@ -57,7 +57,7 @@
 					<td class="hidden-480 format" >${v.androidVersion}</td>
 					<td class="hidden-480 format" >${v.createTimeStr}</td>
 					<td>
-						<a href="javascript:developing();" class="btn mini purple edit" key="${v.id}"><i class="icon-edit"></i> ${i18n("edit")}</a>
+						<a href="javascript:;" class="btn mini purple edit" key="${v.id}"><i class="icon-edit"></i> ${i18n("edit")}</a>
 						<a href="javascript:;" class="btn mini black delete" key="${v.id}"><i class="icon-trash"></i> ${i18n("delete")}</a>
 					</td>
 				</tr>
@@ -65,6 +65,14 @@
 			</tbody>
 		</table>
 		<@layout.pager versions.pager></@layout.pager>  
+	</div>
+	
+	<div id="edit_dialog">
+		<div class="portlet-body form">
+	    <form action="#" id="form_edit" class="form-horizontal">
+			<#include "edit.ftl.html">
+		</form>
+		</div>
 	</div>
 </div>
 <!-- END EXAMPLE TABLE PORTLET-->
